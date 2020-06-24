@@ -100,12 +100,10 @@ class App extends React.Component {
   }
 
   startGame = () => {
-    console.log("hey")
     this.setState({ playing: true });
   }
 
   endGame = () => {
-    console.log("booo")
     this.setState({ playing: false });
   }
 
