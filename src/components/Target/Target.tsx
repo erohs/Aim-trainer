@@ -18,11 +18,11 @@ class Target extends React.Component<ITargetProps> {
 
     render() {
         var targetStyle = {
-            width: `${this.props.settings.Size}px`,
+            width: `${this.props.settings.Sizes}px`,
             left: `${this.props.position[0]}px`,
             top: `${this.props.position[1]}px`,
-            height: `${this.props.settings.Size}px`,
-            backgroundColor: this.props.settings.Colour
+            height: `${this.props.settings.Sizes}px`,
+            backgroundColor: this.props.settings.TargetColour
         }
 
         return <div onMouseDown={this.removeThis} className="target" style={targetStyle} />
