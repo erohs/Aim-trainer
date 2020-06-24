@@ -1,0 +1,21 @@
+.page-container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.page-container--title {
+    margin: var(--l-padding-v);
+    text-align: center;
+    font-size: var(--title-font-size);
+
+}
+
+.page-container--content {
+    width: 100%;
+}
+
+.page-container--start-container {
+    padding: var(--l-padding-v);
+    display: flex;
+    justify-content: center;
+}

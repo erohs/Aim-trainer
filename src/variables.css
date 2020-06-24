@@ -1,0 +1,35 @@
+:root {
+    --main-bg-color: #1A1D1B;
+    --secondary-bg-color: #2B2B2B;
+    --main-fg-color: #F2F2F2;
+    --accent-color: #514BE9;
+    --border-color: #424242;
+
+    --google-color: #DF4A32;
+    --github-color: #444444;
+    --twitter-color: #50ABF1;
+    --facebook-color: #39579A;
+
+    --default-border: 2px solid #424242;
+    --accent-border: 2px solid #514BE9;
+
+    --border-radius: 3px;
+    --border-radius-left: 3px 0 0 3px;
+    --border-radius-right: 0 3px 3px 0;
+
+    --title-font-size: 3em;
+    --logo-font-size: 2em;
+
+    --l-padding: 50px;
+    --l-padding-h: 0 50px;
+    --l-padding-v: 50px 0;
+    --m-padding: 20px;
+    --m-padding-h: 0 20px;
+    --m-padding-v: 20px 0;
+    --s-padding: 10px;
+    --s-padding-h: 0 10px;
+    --s-padding-v: 10px 0;
+    --xs-padding: 5px;
+    --xxs-padding: 2px;
+    --xxxs-padding: 1px;
+}
