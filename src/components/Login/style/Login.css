@@ -1,0 +1,34 @@
+.login--container {
+    padding: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.login {
+    word-wrap: break-word;
+    cursor: pointer;
+    border: var(--default-border);
+    border-radius: var(--border-radius);
+    padding: var(--s-padding-v);
+    color: var(--main-fg-color);
+    background-color: var(--main-bg-color);
+    min-width: 200px;
+    margin: var(--s-padding-v);
+}
+
+.google:hover {
+    background-color: var(--google-color);
+}
+
+.github:hover {
+    background-color: var(--github-color);
+}
+
+.twitter:hover {
+    background-color: var(--twitter-color);
+}
+
+.facebook:hover {
+    background-color: var(--facebook-color);
+}

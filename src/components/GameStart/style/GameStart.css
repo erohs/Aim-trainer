@@ -1,0 +1,20 @@
+.game-start--container {
+    padding: var(--l-padding-v);
+    display: flex;
+    justify-content: center;
+}
+
+.game-start--button {
+    cursor: pointer;
+    border: var(--accent-border);
+    border-radius: var(--border-radius);
+    background-color: var(--main-bg-color);
+    color: var(--main-fg-color);
+    padding: var(--s-padding-v);
+    width: 150px;
+    margin: var(--s-padding-h);
+}
+
+.game-start--button:hover {
+    background-color: var(--accent-color);
+} 

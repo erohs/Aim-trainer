@@ -1,0 +1,61 @@
+.game-over {
+    width: 100%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.game-over--title {
+    font-size: 100px;
+    text-align: center;
+    color: var(--accent-color);
+}
+
+.results-container {
+    display: flex;
+    justify-content: center;
+}
+
+.results-target {
+    margin: var(--m-padding-h);
+    border: var(--accent-border);
+    width: 200px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: var(--s-padding) var(--m-padding)
+}
+.results-target :nth-child(1):before {
+    content: 'Total targets: '
+}
+.results-target :nth-child(2):before {
+    content: 'Targets missed: '
+}
+.results-target :nth-child(3):before {
+    content: 'Targets hit: '
+}
+
+.results-click {
+    margin: var(--m-padding-h);
+    border: var(--accent-border);
+    width: 200px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: var(--s-padding) var(--m-padding)
+}
+
+.results-click :nth-child(1):before {
+    content: 'Total clicks: '
+}
+
+.results-click :nth-child(2):before {
+    content: 'Clicks missed: '
+}
+
+.results-click :nth-child(3):before {
+    content: 'Clicks hit: '
+}
+
