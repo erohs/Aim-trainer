@@ -23,9 +23,11 @@ time, mark, audio, video, input, button {
 }
 
 body, input {
-  font-family: 'Open Sans', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-family: 'Open Sans', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: var(--main-fg-color);
+	background-color: var(--main-bg-color);
 }
 
 code {

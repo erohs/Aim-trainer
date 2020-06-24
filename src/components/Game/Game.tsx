@@ -61,40 +61,20 @@ class Game extends React.Component<IGameProps> {
         this.setGameState("gameover", true)
     }
 
-    getSettingsValue = (keys: any, values: any, setting: string) => {
-        let gameSettings = { ...this.props.gameSettings };
-        let index = keys.indexOf(gameSettings[setting]);
-        let value = values[index];
-        return value
-    }
-
-    getColourValue = (setting: string) => {
-        let gameSettings = { ...this.props.gameSettings };
-        let colour: string = "#FF0000";
-        let userColour = gameSettings[setting]
+    setColour = (colour: string) => {
+        let output: string = "#FF0000";
         const re = /[0-9A-Fa-f]{6}/g;
-        if (!isNullOrUndefined(userColour) && re.test(userColour)) colour = userColour;
-        return colour;
+        if (!isNullOrUndefined(colour) && re.test(colour)) output = colour;
+        return output;
     }
 
     manageSettings = () => {
-        const difficulty = this.getSettingsValue(Object.keys(Values["Difficulty"]), Object.values(Values["Difficulty"]), "Difficulty");
-        const duration = this.getSettingsValue(Object.keys(Values["Duration"]), Object.values(Values["Duration"]), "Duration");
-        const size = this.getSettingsValue(Object.keys(Values["Sizes"]), Object.values(Values["Sizes"]), "Size");
-        const cursor = this.getSettingsValue(Object.keys(Values["Cursor"]), Object.values(Values["Cursor"]), "Cursor");
-        const sound = this.getSettingsValue(Object.keys(Values["Sound"]), Object.values(Values["Sound"]), "Sound");
-        const colour = this.getColourValue("Target Colour");
-
-        let settings = {
-            "Difficulty": difficulty,
-            "Duration": duration,
-            "Size": size,
-            "Cursor": cursor,
-            "Sound": sound,
-            "Colour": colour
-        };
+        let settings = { ...this.state.settings }
+        Object.keys(this.props.gameSettings).forEach((key) => {
+            key === "TargetColour" ? settings[key] = this.setColour(this.props.gameSettings[key].toString()) : settings[key] = Values[key][this.props.gameSettings[key]];
+        })
         this.setState({ settings })
-        this.speed = setInterval(() => this.tick(), difficulty);
+        this.speed = setInterval(() => this.tick(), settings.Difficulty);
     }
 
     componentDidMount() {
@@ -103,8 +83,6 @@ class Game extends React.Component<IGameProps> {
 
     setTargetCount = (name: string) => {
         const targetCount = { ...this.state.targetCount }
-
-
         targetCount[name] = targetCount[name] + 1;
 
         if (name === "misses") {
@@ -159,7 +137,7 @@ class Game extends React.Component<IGameProps> {
             clearInterval(this.speed);
             return []
         }
-        const offset = this.state.settings.Size;
+        const offset = this.state.settings.Sizes;
         const rect = area.getBoundingClientRect();
         const minx = rect.left + offset;
         const maxx = rect.right - offset;

@@ -1,8 +1,8 @@
 import React from 'react';
 import './style/PageContainer.css';
-import GameSettings from '../GameSettings/GameSettings';
-import NavigationBar from '../NavigationBar/NavigationBar';
-import GameStart from '../GameStart/GameStart';
+import GameSettings from '../../components/GameSettings/GameSettings';
+import NavigationBar from '../../components/NavigationBar/NavigationBar';
+import GameStart from '../../components/GameStart/GameStart';
 import { IStateTypes } from '../../App';
 
 type PageContainerProps = {
