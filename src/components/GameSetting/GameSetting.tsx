@@ -42,7 +42,6 @@ class GameSetting extends React.Component<IGameSettingProps> {
         var prevValue = "";
         if (prevIndex < 0) {
             var prevArrayLength = this.props.values!.length
-            console.log(prevArrayLength);
             prevValue = this.props.values![prevArrayLength - 1];
         } else {
             prevValue = this.props.values![prevIndex];

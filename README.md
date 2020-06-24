@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -46,4 +45,3 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 =======
 # Aim-trainer
 A simple aim trainer built with react and typescript using firebase.
->>>>>>> f2e05edfaba63ca2a38c4b91ba22970b6a4b5f8a

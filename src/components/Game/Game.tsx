@@ -115,7 +115,6 @@ class Game extends React.Component<IGameProps> {
     }
 
     setClickCount = (name: string) => {
-        console.log("it werks");
         const clickCount = { ...this.state.clickCount }
         clickCount[name] = clickCount[name] + 1;
 
