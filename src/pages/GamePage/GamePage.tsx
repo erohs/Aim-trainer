@@ -1,7 +1,7 @@
 import React from 'react';
-import './style/GameContainer.css';
-import NavigationBar from '../NavigationBar/NavigationBar';
-import Game from '../Game/Game';
+import './style/GamePage.css';
+import NavigationBar from '../../components/NavigationBar/NavigationBar';
+import Game from '../../components/Game/Game';
 import { IStateTypes } from '../../App';
 
 interface IGameProps {
@@ -12,7 +12,7 @@ interface IGameProps {
 
 };
 
-class GameContainer extends React.Component<IGameProps> {
+class GamePage extends React.Component<IGameProps> {
     render() {
 
         return (
@@ -29,4 +29,4 @@ class GameContainer extends React.Component<IGameProps> {
     }
 }
 
-export default GameContainer;
+export default GamePage;

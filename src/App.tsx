@@ -1,7 +1,6 @@
 import React from 'react';
-import './App.css';
-import PageContainer from './components/PageContainer/PageContainer';
-import GameContainer from './components/GameContainer/GameContainer';
+import PageContainer from './pages/PageContainer/PageContainer';
+import GamePage from './pages/GamePage/GamePage';
 import { defaults } from './components/GameSettings/GameSettings';
 import { firebaseApp } from './base';
 import firebase from 'firebase';
@@ -110,34 +109,28 @@ class App extends React.Component {
   render() {
     if (this.state.playing === false) {
       return (
-        <div className="App" >
-          <PageContainer
-            gameSettings={this.state.gameSettings}
-            updateGameSettings={this.updateGameSettings}
-            title={"SETTINGS"}
-            authenticate={this.authenticate}
-            logout={this.logout}
-            user={this.state.user}
-            startGame={this.startGame}
-            playing={this.state.playing}
-            endGame={this.endGame}
-          />
-        </div>
+        <PageContainer
+          gameSettings={this.state.gameSettings}
+          updateGameSettings={this.updateGameSettings}
+          title={"SETTINGS"}
+          authenticate={this.authenticate}
+          logout={this.logout}
+          user={this.state.user}
+          startGame={this.startGame}
+          playing={this.state.playing}
+          endGame={this.endGame}
+        />
       );
     } else {
       return (
-        <div className="App" >
-          <GameContainer
-            playing={this.state.playing}
-            endGame={this.endGame}
-            gameSettings={this.state.gameSettings}
-            user={this.state.user}
-          />
-        </div>
+        <GamePage
+          playing={this.state.playing}
+          endGame={this.endGame}
+          gameSettings={this.state.gameSettings}
+          user={this.state.user}
+        />
       )
-
     }
-
   }
 }
 
