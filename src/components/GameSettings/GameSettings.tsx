@@ -12,21 +12,25 @@ enum SettingNames {
     "sound" = "Sound"
 }
 
+interface IValues {
+    [key: string]: IStateTypes<string | number | boolean>
+}
+
 interface ISettingsProps {
     gameSettings: IStateTypes<string>
     updateGameSettings: Function
 }
 
-var defaults: IStateTypes<string> = {
+export var defaults: IStateTypes<string> = {
     "Difficulty": "Medium",
     "Duration": "30 seconds",
-    "Size": "Medium",
+    "Sizes": "Medium",
     "Cursor": "Crosshair",
-    "Target Colour": "#FF0000",
+    "TargetColour": "#FF0000",
     "Sound": "On"
 }
 
-export var Values = {
+export var Values: IValues = {
     "Difficulty": { "Easy": 1000, "Medium": 800, "Hard": 600, "Very Hard": 400 },
     "Duration": { "15 seconds": 15, "30 seconds": 30, "60 seconds": 60, "90 seconds": 90, "120 seconds": 120 },
     "Sizes": { "Tiny": 10, "Small": 20, "Medium": 40, "Large": 80 },
@@ -36,8 +40,6 @@ export var Values = {
 
 class GameSettings extends React.Component<ISettingsProps> {
     render() {
-
-
         return (
             <div className="game-settings">
                 <GameSetting
@@ -86,6 +88,5 @@ class GameSettings extends React.Component<ISettingsProps> {
     }
 }
 
-export { defaults };
 export { SettingNames };
 export default GameSettings;
