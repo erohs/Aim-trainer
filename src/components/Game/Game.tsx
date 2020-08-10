@@ -81,6 +81,10 @@ class Game extends React.Component<IGameProps> {
         this.manageSettings()
     }
 
+    componentWillUnmount() {
+        clearInterval(this.speed);
+    }
+
     setTargetCount = (name: string) => {
         const targetCount = { ...this.state.targetCount }
         targetCount[name] = targetCount[name] + 1;
@@ -133,10 +137,6 @@ class Game extends React.Component<IGameProps> {
 
     randomPosition = () => {
         const area = document.getElementsByClassName('game-area')[0] as HTMLDivElement;
-        if (area === undefined) {
-            clearInterval(this.speed);
-            return []
-        }
         const offset = this.state.settings.Sizes;
         const rect = area.getBoundingClientRect();
         const minx = rect.left + offset;

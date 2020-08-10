@@ -6,9 +6,9 @@ import { IStateTypes } from '../../App';
 enum SettingNames {
     "difficulty" = "Difficulty",
     "duration" = "Duration",
-    "size" = "Size",
+    "size" = "Sizes",
     "cursor" = "Cursor",
-    "colour" = "Target Colour",
+    "colour" = "TargetColour",
     "sound" = "Sound"
 }
 
