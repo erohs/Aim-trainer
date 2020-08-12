@@ -1,6 +1,6 @@
 .navigation-bar {
     border-top: 8px solid var(--accent-color);
-    min-height: 70px;
+    height: 74px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -19,6 +19,17 @@
 .navigation-bar ul li {
     display: inline-block;
     padding-left: var(--m-padding);
+}
+
+.navigation-bar--link {
+    text-decoration: none;
+    background: none;
+    color: var(--main-fg-color);
+}
+
+.navigation-bar--link:hover {
+    color: var(--accent-color);
+    cursor: pointer;
 }
 
 .navigation-bar--end-game {

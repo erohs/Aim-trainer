@@ -1,22 +1,20 @@
 import React from 'react';
 import './style/Countdown.css';
-
-interface ICountdownProps {
-    setGameState: Function
-};
-
-interface IState {
-    countdown: number
-    display: string
-}
+import { ICountdownProps } from './interfaces/ICountdownProps';
+import { ICountdownState } from './interfaces/ICountdownState';
 
 class Countdown extends React.Component<ICountdownProps> {
 
-    state: IState = {
+    state: ICountdownState = {
         countdown: 3,
         display: "block"
     }
+
     timer = setInterval(() => this.tick(), 1000);
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    }
 
     tick() {
         const current = this.state.countdown;

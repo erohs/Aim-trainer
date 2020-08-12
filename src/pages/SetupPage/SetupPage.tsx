@@ -1,31 +1,19 @@
 import React from 'react';
-import './style/PageContainer.css';
+import './style/SetupPage.css';
 import GameSettings from '../../components/GameSettings/GameSettings';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
 import GameStart from '../../components/GameStart/GameStart';
-import { IStateTypes } from '../../App';
+import { ISetupPageProps } from './interfaces/ISetupPageProps'
 
-type PageContainerProps = {
-    gameSettings: IStateTypes<string>
-    updateGameSettings: Function
-    title: string
-    authenticate: Function
-    logout: () => void
-    user: IStateTypes<any>
-    playing: boolean
-    startGame: () => void
-    endGame: () => void
-};
-
-class PageContainer extends React.Component<PageContainerProps> {
+class SetupPage extends React.Component<ISetupPageProps> {
 
     render() {
         return (
             <>
-                <NavigationBar playing={this.props.playing} endGame={this.props.endGame} />
-                <div className="page-container" >
+                <NavigationBar />
+                <div className="setup-page" >
 
-                    <h2 className="page-container--title">{this.props.title}</h2>
+                    <h2 className="setup-page--title">{this.props.title}</h2>
                     <GameSettings
                         gameSettings={this.props.gameSettings}
                         updateGameSettings={this.props.updateGameSettings}
@@ -34,13 +22,11 @@ class PageContainer extends React.Component<PageContainerProps> {
                         logout={this.props.logout}
                         authenticate={this.props.authenticate}
                         user={this.props.user}
-                        startGame={this.props.startGame}
                     />
-
                 </div>
             </>
         )
     }
 }
 
-export default PageContainer;
+export default SetupPage;

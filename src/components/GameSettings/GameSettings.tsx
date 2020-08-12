@@ -1,25 +1,10 @@
 import React from 'react';
 import './style/GameSettings.css';
-import GameSetting, { SettingType } from '../GameSetting/GameSetting';
+import GameSetting from '../GameSetting/GameSetting';
 import { IStateTypes } from '../../App';
-
-enum SettingNames {
-    "difficulty" = "Difficulty",
-    "duration" = "Duration",
-    "size" = "Sizes",
-    "cursor" = "Cursor",
-    "colour" = "TargetColour",
-    "sound" = "Sound"
-}
-
-interface IValues {
-    [key: string]: IStateTypes<string | number | boolean>
-}
-
-interface ISettingsProps {
-    gameSettings: IStateTypes<string>
-    updateGameSettings: Function
-}
+import { SettingNames, SettingTypes } from '../../enums';
+import { IGameSettingsProps } from './interfaces/IGameSettingsProps';
+import { IGameSettingsValues } from './interfaces/IGameSettingsValues';
 
 export var defaults: IStateTypes<string> = {
     "Difficulty": "Medium",
@@ -30,7 +15,7 @@ export var defaults: IStateTypes<string> = {
     "Sound": "On"
 }
 
-export var Values: IValues = {
+export var Values: IGameSettingsValues = {
     "Difficulty": { "Easy": 1000, "Medium": 800, "Hard": 600, "Very Hard": 400 },
     "Duration": { "15 seconds": 15, "30 seconds": 30, "60 seconds": 60, "90 seconds": 90, "120 seconds": 120 },
     "Sizes": { "Tiny": 10, "Small": 20, "Medium": 40, "Large": 80 },
@@ -38,7 +23,7 @@ export var Values: IValues = {
     "Sound": { "On": true, "Off": false }
 }
 
-class GameSettings extends React.Component<ISettingsProps> {
+class GameSettings extends React.Component<IGameSettingsProps> {
     render() {
         return (
             <div className="game-settings">
@@ -46,41 +31,41 @@ class GameSettings extends React.Component<ISettingsProps> {
                     gameSettings={this.props.gameSettings}
                     updateGameSettings={this.props.updateGameSettings}
                     values={Object.keys(Values["Difficulty"])}
-                    type={SettingType.select}
+                    type={SettingTypes.select}
                     name={SettingNames.difficulty}
                 />
                 <GameSetting
                     gameSettings={this.props.gameSettings}
                     updateGameSettings={this.props.updateGameSettings}
                     values={Object.keys(Values["Duration"])}
-                    type={SettingType.select}
+                    type={SettingTypes.select}
                     name={SettingNames.duration}
                 />
                 <GameSetting
                     gameSettings={this.props.gameSettings}
                     updateGameSettings={this.props.updateGameSettings}
                     values={Object.keys(Values["Sizes"])}
-                    type={SettingType.select}
+                    type={SettingTypes.select}
                     name={SettingNames.size}
                 />
                 <GameSetting
                     gameSettings={this.props.gameSettings}
                     updateGameSettings={this.props.updateGameSettings}
                     values={Object.keys(Values["Cursor"])}
-                    type={SettingType.select}
+                    type={SettingTypes.select}
                     name={SettingNames.cursor}
                 />
                 <GameSetting
                     gameSettings={this.props.gameSettings}
                     updateGameSettings={this.props.updateGameSettings}
-                    type={SettingType.colour}
+                    type={SettingTypes.colour}
                     name={SettingNames.colour}
                 />
                 <GameSetting
                     gameSettings={this.props.gameSettings}
                     updateGameSettings={this.props.updateGameSettings}
                     values={Object.keys(Values["Sound"])}
-                    type={SettingType.toggle}
+                    type={SettingTypes.toggle}
                     name={SettingNames.sound}
                 />
             </div>
@@ -88,5 +73,4 @@ class GameSettings extends React.Component<ISettingsProps> {
     }
 }
 
-export { SettingNames };
 export default GameSettings;

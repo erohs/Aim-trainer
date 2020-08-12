@@ -1,23 +1,10 @@
 import React from 'react';
 import './style/GameSetting.css';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
-import { SettingNames } from '../GameSettings/GameSettings';
-import { IStateTypes } from '../../App';
 import { isNullOrUndefined } from 'util';
+import { IGameSettingProps } from './interfaces/IGameSettingProps';
+import { SettingTypes } from '../../enums';
 
-enum SettingType {
-    "select",
-    "colour",
-    "toggle"
-}
-
-interface IGameSettingProps {
-    type: SettingType,
-    name: SettingNames,
-    values?: Array<string>,
-    gameSettings: IStateTypes<string>,
-    updateGameSettings: Function
-};
 
 class GameSetting extends React.Component<IGameSettingProps> {
     nextValue = () => {
@@ -79,7 +66,7 @@ class GameSetting extends React.Component<IGameSettingProps> {
         }
 
         switch (this.props.type) {
-            case SettingType.select:
+            case SettingTypes.select:
                 return (
                     <div className="game-setting--container">
                         <p className="game-setting--name">{this.props.name}</p>
@@ -92,7 +79,7 @@ class GameSetting extends React.Component<IGameSettingProps> {
                         </div>
                     </div>
                 )
-            case SettingType.colour:
+            case SettingTypes.colour:
                 return (
                     <div className="game-setting--container">
                         <p className="game-setting--name">{this.props.name}</p>
@@ -107,7 +94,7 @@ class GameSetting extends React.Component<IGameSettingProps> {
                         </div>
                     </div>
                 )
-            case SettingType.toggle:
+            case SettingTypes.toggle:
                 return (
                     <div className="game-setting--container">
                         <p className="game-setting--name">{this.props.name}</p>
@@ -125,4 +112,3 @@ class GameSetting extends React.Component<IGameSettingProps> {
 }
 
 export default GameSetting;
-export { SettingType };

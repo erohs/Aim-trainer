@@ -1,12 +1,9 @@
 import React from 'react';
 import './style/Login.css';
 import firebase from 'firebase';
+import { ILoginProps } from './interfaces/ILoginProps';
 
-type LoginProps = {
-    authenticate: Function
-};
-
-class Login extends React.Component<LoginProps> {
+class Login extends React.Component<ILoginProps> {
     render() {
         return (
             <nav className="login--container">

@@ -1,34 +1,31 @@
 import React from 'react';
 import Logo from '../Logo/Logo';
 import './style/NavigationBar.css';
+import { Link } from 'react-router-dom';
 
-interface INavigationBarProps {
-    playing: boolean
-    endGame: () => void
-}
-
-class NavigationBar extends React.Component<INavigationBarProps> {
+class NavigationBar extends React.Component {
     render() {
-        if (this.props.playing === false) {
+        var currentLocation = window.location.pathname;
+        if (currentLocation === "/play") {
             return (
                 <div className="navigation-bar">
                     <Logo size={25} />
-                    <ul>
-                        <li>Home</li>
-                        <li>Leaderboard</li>
-                    </ul>
-                </div>
-            )
-
-        } else {
-            return (
-                <div className="navigation-bar">
-                    <Logo size={25} />
-                    <button onClick={this.props.endGame} className={"navigation-bar--end-game"}>End Game</button>
+                    <Link to="/" >
+                        <button className="navigation-bar--end-game" >End Game</button>
+                    </Link>
                 </div>
             )
         }
 
+        return (
+            <div className="navigation-bar">
+                <Logo size={25} />
+                <ul>
+                    <li ><Link className="navigation-bar--link" to="/" >Home</Link></li>
+                    <li ><Link className="navigation-bar--link" to="/leaderboard" >Leaderboard</Link></li>
+                </ul>
+            </div>
+        )
     }
 }
 

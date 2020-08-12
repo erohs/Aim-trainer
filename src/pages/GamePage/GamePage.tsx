@@ -2,22 +2,13 @@ import React from 'react';
 import './style/GamePage.css';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
 import Game from '../../components/Game/Game';
-import { IStateTypes } from '../../App';
-
-interface IGameProps {
-    playing: boolean
-    endGame: () => void
-    gameSettings: IStateTypes<string>
-    user: IStateTypes<any>
-
-};
+import { IGameProps } from './interfaces/IGamePageProps';
 
 class GamePage extends React.Component<IGameProps> {
     render() {
-
         return (
             <>
-                <NavigationBar playing={this.props.playing} endGame={this.props.endGame} />
+                <NavigationBar />
                 <div className="game-container">
                     <Game
                         gameSettings={this.props.gameSettings}

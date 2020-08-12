@@ -1,0 +1,10 @@
+.leaderboard-page--container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.leaderboard-page--title {
+    margin: var(--l-padding-v);
+    text-align: center;
+    font-size: var(--title-font-size);
+}
