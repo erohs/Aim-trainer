@@ -1,21 +1,8 @@
 import React from 'react';
 import './style/Target.css';
-import { IStateTypes } from '../../App';
-
-interface ITargetProps {
-    index: number
-    targets: IStateTypes<any>
-    removeOnClick: (id: number) => void
-    position: Array<number>
-    settings: IStateTypes<any>
-};
+import { ITargetProps } from './interfaces/ITargetProps';
 
 class Target extends React.Component<ITargetProps> {
-
-    removeThis = (event: React.FormEvent<HTMLDivElement>) => {
-        this.props.removeOnClick(this.props.index)
-    }
-
     render() {
         var targetStyle = {
             width: `${this.props.settings.Sizes}px`,
@@ -25,7 +12,7 @@ class Target extends React.Component<ITargetProps> {
             backgroundColor: this.props.settings.TargetColour
         }
 
-        return <div onMouseDown={this.removeThis} className="target" style={targetStyle} />
+        return <div onMouseDown={() => this.props.removeOnClick(this.props.index)} className="target" style={targetStyle} />
     }
 }
 

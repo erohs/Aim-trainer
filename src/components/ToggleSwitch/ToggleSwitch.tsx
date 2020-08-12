@@ -1,10 +1,6 @@
 import React from 'react';
 import './style/ToggleSwitch.css';
-
-interface IToggleSwitchProps {
-    value: string,
-    handleChangeCheckbox: (event: React.FormEvent<HTMLInputElement>) => void;
-};
+import { IToggleSwitchProps } from './interfaces/IToggleSwitchProps';
 
 class ToggleSwitch extends React.Component<IToggleSwitchProps> {
     render() {

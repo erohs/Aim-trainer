@@ -1,27 +1,23 @@
 import React from 'react';
 import './style/GameStart.css';
-import Login from '../Login/Login';
-import { IStateTypes } from '../../App';
+// import Login from '../Login/Login';
+import { Link } from 'react-router-dom';
+import { IGameStartProps } from './interfaces/IGameStartProps';
 
-type GameStartProps = {
-    authenticate: Function
-    logout: () => void
-    user: IStateTypes<any>
-    startGame: () => void
-};
-
-class GameStart extends React.Component<GameStartProps> {
+class GameStart extends React.Component<IGameStartProps> {
     render() {
-        const logout = <button className="game-start--button" onClick={this.props.logout}>Log out</button>
+        // const logout = <button className="game-start--button" onClick={this.props.logout}>Log out</button>
 
-        if (!this.props.user.uid) {
-            return <Login authenticate={this.props.authenticate} />
-        }
+        // if (!this.props.user.uid) {
+        //     return <Login authenticate={this.props.authenticate} />
+        // }
 
         return (
             <div className="game-start--container">
-                {logout}
-                <button onClick={this.props.startGame} className="game-start--button">Start</button>
+                {/* {logout} */}
+                <Link to="/play">
+                    <button className="game-start--button">Start</button>
+                </Link>
             </div>
         )
     }
