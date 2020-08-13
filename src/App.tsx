@@ -7,6 +7,7 @@ import { firebaseApp } from './base';
 import firebase from 'firebase';
 import { Route, Redirect, Switch } from "react-router-dom";
 import NotFound from './pages/NotFound/NotFound';
+import ResultsPage from './pages/ResultsPage/ResultsPage';
 
 export interface IStateTypes<TValue> {
   [key: string]: TValue
@@ -79,10 +80,6 @@ class App extends React.Component {
     this.setState({ user: {} })
   }
 
-  setView = (newView: string) => {
-    this.setState({ view: newView });
-  }
-
   render() {
     return (
       <Switch>
@@ -103,6 +100,7 @@ class App extends React.Component {
           />
         )} />
         <Route exact path="/leaderboard" component={LeaderBoardPage} />
+        <Route exact path="/results" component={ResultsPage} />
         <Route path="/404" component={NotFound} />
         <Redirect to="/404" />
       </Switch>

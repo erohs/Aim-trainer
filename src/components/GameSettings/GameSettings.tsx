@@ -20,7 +20,8 @@ export var Values: IGameSettingsValues = {
     "Duration": { "15 seconds": 15, "30 seconds": 30, "60 seconds": 60, "90 seconds": 90, "120 seconds": 120 },
     "Sizes": { "Tiny": 10, "Small": 20, "Medium": 40, "Large": 80 },
     "Cursor": { "Default": "default", "Crosshair": "crosshair" },
-    "Sound": { "On": true, "Off": false }
+    "Sound": { "On": true, "Off": false },
+    "Colour": { "Default": "#FF0000" }
 }
 
 class GameSettings extends React.Component<IGameSettingsProps> {
