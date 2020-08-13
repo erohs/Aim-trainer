@@ -73,8 +73,8 @@ class GameSetting extends React.Component<IGameSettingProps> {
                         <div className="game-setting--selector">
                             <p>{this.props.gameSettings[this.props.name] || this.props.values![0]}</p>
                             <div className="game-setting--arrows">
-                                <button onClick={this.nextValue} className="game-setting--arrow">&#x25B2;</button>
-                                <button onClick={this.prevValue} className="game-setting--arrow">&#x25BC;</button>
+                                <button onClick={this.prevValue} className="game-setting--arrow left">&#x25C0;</button>
+                                <button onClick={this.nextValue} className="game-setting--arrow right">&#x25B6;</button>
                             </div>
                         </div>
                     </div>

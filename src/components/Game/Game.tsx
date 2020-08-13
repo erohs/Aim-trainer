@@ -12,7 +12,14 @@ class Game extends React.Component<IGameProps> {
 
     state: IGameState = {
         targets: {},
-        settings: {},
+        settings: {
+            Cursor: "crosshair",
+            Difficulty: 800,
+            Duration: 30,
+            Sizes: 40,
+            Sound: false,
+            TargetColour: "#FF0000"
+        },
         playing: false,
         gameover: false,
         targetCount: {

@@ -1,7 +1,7 @@
-import { IStateTypes } from '../../../App';
+import { IStateTypes } from "../../../App";
 
 export interface IGameStartProps {
+    logout: Function
     authenticate: Function
-    logout: () => void
     user: IStateTypes<any>
-};
+}
