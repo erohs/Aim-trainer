@@ -1,4 +1,4 @@
 export interface IToggleSwitchProps {
-    value: string,
+    value: boolean,
     handleChangeCheckbox: (event: React.FormEvent<HTMLInputElement>) => void;
 };

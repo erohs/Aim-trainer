@@ -13,11 +13,8 @@ class SetupPage extends React.Component<ISetupPageProps> {
                 <NavigationBar />
                 <div className="setup-page" >
 
-                    <h2 className="setup-page--title">{this.props.title}</h2>
-                    <GameSettings
-                        gameSettings={this.props.gameSettings}
-                        updateGameSettings={this.props.updateGameSettings}
-                    />
+                    <h2 className="setup-page--title">SETTINGS</h2>
+                    <GameSettings />
                     <GameStart
                         logout={this.props.logout}
                         authenticate={this.props.authenticate}

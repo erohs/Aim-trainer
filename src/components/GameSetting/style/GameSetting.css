@@ -22,6 +22,7 @@
 }
 
 .game-setting--name {
+    text-transform: capitalize;
     font-weight: bold;
     display: flex;
     align-items: center;
