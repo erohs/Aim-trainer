@@ -14,13 +14,11 @@ export interface IStateTypes<TValue> {
 }
 
 interface IState {
-  gameSettings: IStateTypes<string>
   user: IStateTypes<any>;
 }
 
 class App extends React.Component {
   state: IState = {
-    gameSettings: {},
     user: {},
   }
 
@@ -38,9 +36,6 @@ class App extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    localStorage.setItem("gameSettings", JSON.stringify(this.state.gameSettings))
-  }
 
   authHandler = async (authData: any) => {
     let docRef = firebase.firestore().collection('users').doc(authData.user.uid);
@@ -85,10 +80,7 @@ class App extends React.Component {
           />
         )} />
         <Route exact path="/play" render={() => (
-          <GamePage
-            gameSettings={this.state.gameSettings}
-            user={this.state.user}
-          />
+          <GamePage user={this.state.user} />
         )} />
         <Route exact path="/leaderboard" component={LeaderBoardPage} />
         <Route exact path="/results" component={ResultsPage} />

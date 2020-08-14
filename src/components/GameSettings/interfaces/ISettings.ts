@@ -9,7 +9,7 @@ interface ISetting {
     types: Array<string>
     values: Array<string | boolean | number>
     type: SettingTypes
-    defaultIndex: number
+    default: string | boolean | number
 }
 
 export interface ISettings {
