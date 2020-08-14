@@ -6,5 +6,6 @@ export interface IGameState {
     gameover: boolean
     targetCount: IStateTypes<number>
     clickCount: IStateTypes<number>
-    score: number
+    score: number,
+    timer: number
 }
