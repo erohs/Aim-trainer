@@ -2,9 +2,9 @@ import React from 'react';
 import './style/GameSettings.css';
 import GameSetting from '../GameSetting/GameSetting';
 import { IStateTypes } from '../../App';
-import { SettingNames, SettingTypes } from '../../enums';
-import { IGameSettingsProps } from './interfaces/IGameSettingsProps';
-import { IGameSettingsValues } from './interfaces/IGameSettingsValues';
+import { IGameSettingsValues } from './interfaces/ISettings';
+import { IGameSettingsState } from './interfaces/IGameSettingsState';
+import { Settings } from './Settings';
 
 export var defaults: IStateTypes<string> = {
     "Difficulty": "Medium",
@@ -24,51 +24,68 @@ export var Values: IGameSettingsValues = {
     "Colour": { "Default": "#FF0000" }
 }
 
-class GameSettings extends React.Component<IGameSettingsProps> {
+class GameSettings extends React.Component {
+
+    state: IGameSettingsState = {
+        settings: {}
+    }
+
+    componentWillUnmount() {
+        this.checkColour()
+    }
+
+    checkColour = () => {
+        const re = /[0-9A-Fa-f]{6}/g;
+        if (!re.test(this.state.settings.colour as string)) {
+            const settings = { ...this.state.settings };
+            settings["colour"] = "#FF0000";
+            localStorage.setItem("settings", JSON.stringify(settings));
+        }
+    }
+
+    componentDidMount() {
+        if (localStorage.getItem("settings") === null) {
+            this.setDefaultSettings();
+        }
+        const settings = JSON.parse(localStorage.getItem("settings") || '{}');
+        this.setState({ settings: settings });
+    }
+
+    setDefaultSettings = () => {
+        let defaultSettings: IStateTypes<string | number | boolean> = {};
+        for (const setting in Settings) {
+            var index: number = Settings[setting].defaultIndex;
+            defaultSettings[setting] = Settings[setting].values[index];
+        };
+        localStorage.setItem("settings", JSON.stringify(defaultSettings));
+    }
+
+    componentDidUpdate() {
+        localStorage.setItem("settings", JSON.stringify(this.state.settings));
+    }
+
+    updateSettings = (setting: string, value: string | boolean | number) => {
+        let settings = { ...this.state.settings };
+        settings[setting] = value;
+        this.setState({ settings });
+    }
+
     render() {
         return (
             <div className="game-settings">
-                <GameSetting
-                    gameSettings={this.props.gameSettings}
-                    updateGameSettings={this.props.updateGameSettings}
-                    values={Object.keys(Values["Difficulty"])}
-                    type={SettingTypes.select}
-                    name={SettingNames.difficulty}
-                />
-                <GameSetting
-                    gameSettings={this.props.gameSettings}
-                    updateGameSettings={this.props.updateGameSettings}
-                    values={Object.keys(Values["Duration"])}
-                    type={SettingTypes.select}
-                    name={SettingNames.duration}
-                />
-                <GameSetting
-                    gameSettings={this.props.gameSettings}
-                    updateGameSettings={this.props.updateGameSettings}
-                    values={Object.keys(Values["Sizes"])}
-                    type={SettingTypes.select}
-                    name={SettingNames.size}
-                />
-                <GameSetting
-                    gameSettings={this.props.gameSettings}
-                    updateGameSettings={this.props.updateGameSettings}
-                    values={Object.keys(Values["Cursor"])}
-                    type={SettingTypes.select}
-                    name={SettingNames.cursor}
-                />
-                <GameSetting
-                    gameSettings={this.props.gameSettings}
-                    updateGameSettings={this.props.updateGameSettings}
-                    type={SettingTypes.colour}
-                    name={SettingNames.colour}
-                />
-                <GameSetting
-                    gameSettings={this.props.gameSettings}
-                    updateGameSettings={this.props.updateGameSettings}
-                    values={Object.keys(Values["Sound"])}
-                    type={SettingTypes.toggle}
-                    name={SettingNames.sound}
-                />
+                {Object.keys(Settings).map((setting, index) => {
+                    return (
+                        <GameSetting
+                            key={index}
+                            name={setting}
+                            type={Settings[setting].type}
+                            values={Settings[setting].values}
+                            types={Settings[setting].types}
+                            currentValue={this.state.settings[setting]}
+                            updateSettings={this.updateSettings}
+                        />
+                    )
+                })}
             </div>
         )
     }

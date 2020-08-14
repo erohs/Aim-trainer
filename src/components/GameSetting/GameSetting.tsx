@@ -1,77 +1,45 @@
 import React from 'react';
 import './style/GameSetting.css';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
-import { isNullOrUndefined } from 'util';
 import { IGameSettingProps } from './interfaces/IGameSettingProps';
 import { SettingTypes } from '../../enums';
 
 
 class GameSetting extends React.Component<IGameSettingProps> {
     nextValue = () => {
-        var index = this.props.values!.indexOf(this.props.gameSettings[this.props.name])
-        var nextIndex = index! + 1;
-        var nextArrayLength = this.props.values!.length - 1;
-        var nextValue = "";
-        if (nextIndex > nextArrayLength) {
-            nextValue = this.props.values![0]
-        } else {
-            nextValue = this.props.values![nextIndex];
-        }
-        const updatedGameSettings = {
-            [this.props.name]: nextValue
-        };
-        this.props.updateGameSettings(updatedGameSettings);
+        const index = this.props.values.indexOf(this.props.currentValue)
+        const nextIndex = index + 1;
+        const nextArrayLength = this.props.values.length - 1;
+        const nextValue = nextIndex > nextArrayLength ? this.props.values[0] : this.props.values[nextIndex];
+
+        this.props.updateSettings(this.props.name, nextValue);
     }
 
     prevValue = () => {
-        var index = this.props.values!.indexOf(this.props.gameSettings[this.props.name])
-        var prevIndex = index! - 1;
-        var prevValue = "";
-        if (prevIndex < 0) {
-            var prevArrayLength = this.props.values!.length
-            prevValue = this.props.values![prevArrayLength - 1];
-        } else {
-            prevValue = this.props.values![prevIndex];
-        }
-        const updatedGameSettings = {
-            [this.props.name]: prevValue
-        };
-        this.props.updateGameSettings(updatedGameSettings);
+        const index = this.props.values.indexOf(this.props.currentValue)
+        const prevIndex = index - 1;
+        const prevArrayLength = this.props.values.length
+        const prevValue = prevIndex < 0 ? this.props.values[prevArrayLength - 1] : this.props.values[prevIndex];
+
+        this.props.updateSettings(this.props.name, prevValue);
     }
 
     handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-        const updatedGameSettings = {
-            [this.props.name]: event.currentTarget.value
-        };
-        this.props.updateGameSettings(updatedGameSettings);
+        this.props.updateSettings(this.props.name, event.currentTarget.value);
     }
 
     handleChangeCheckbox = (event: React.FormEvent<HTMLInputElement>) => {
-        let checked = "";
-        event.currentTarget.checked === true ? checked = "On" : checked = "Off";
-        const updatedGameSettings = {
-            [this.props.name]: checked
-        };
-        this.props.updateGameSettings(updatedGameSettings);
+        this.props.updateSettings(this.props.name, event.currentTarget.checked);
     }
 
     render() {
-        let colour: string = "#FF0000";
-        let userColour: string = this.props.gameSettings[this.props.name];
-        const re = /[0-9A-Fa-f]{6}/g;
-        if (!isNullOrUndefined(userColour) && re.test(userColour)) colour = userColour;
-
-        let viewColour = {
-            backgroundColor: colour
-        }
-
         switch (this.props.type) {
             case SettingTypes.select:
                 return (
                     <div className="game-setting--container">
                         <p className="game-setting--name">{this.props.name}</p>
                         <div className="game-setting--selector">
-                            <p>{this.props.gameSettings[this.props.name] || this.props.values![0]}</p>
+                            <p>{this.props.types[this.props.values.indexOf(this.props.currentValue)]}</p>
                             <div className="game-setting--arrows">
                                 <button onClick={this.prevValue} className="game-setting--arrow left">&#x25C0;</button>
                                 <button onClick={this.nextValue} className="game-setting--arrow right">&#x25B6;</button>
@@ -87,10 +55,10 @@ class GameSetting extends React.Component<IGameSettingProps> {
                             <input
                                 className="game-setting--input"
                                 type="text"
-                                value={this.props.gameSettings[this.props.name] || "#FF0000"}
+                                value={this.props.currentValue as string}
                                 onChange={this.handleChange}
                             />
-                            <div style={viewColour} className="game-setting--colour"></div>
+                            <div style={{ background: this.props.currentValue as string }} className="game-setting--colour"></div>
                         </div>
                     </div>
                 )
@@ -99,9 +67,9 @@ class GameSetting extends React.Component<IGameSettingProps> {
                     <div className="game-setting--container">
                         <p className="game-setting--name">{this.props.name}</p>
                         <div className="game-setting--selector">
-                            <p>{this.props.gameSettings[this.props.name] || this.props.values![0]}</p>
+                            <p>{this.props.types[this.props.values.indexOf(this.props.currentValue)]}</p>
                             <ToggleSwitch
-                                value={this.props.gameSettings[this.props.name] || this.props.values![0]}
+                                value={this.props.currentValue as boolean}
                                 handleChangeCheckbox={this.handleChangeCheckbox}
                             />
                         </div>

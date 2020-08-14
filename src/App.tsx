@@ -42,12 +42,6 @@ class App extends React.Component {
     localStorage.setItem("gameSettings", JSON.stringify(this.state.gameSettings))
   }
 
-  updateGameSettings = (gameSetting: IStateTypes<string>) => {
-    let gameSettings = { ...this.state.gameSettings };
-    gameSettings[Object.keys(gameSetting)[0]] = Object.values(gameSetting)[0];
-    this.setState({ gameSettings });
-  }
-
   authHandler = async (authData: any) => {
     let docRef = firebase.firestore().collection('users').doc(authData.user.uid);
 
@@ -85,9 +79,6 @@ class App extends React.Component {
       <Switch>
         <Route exact path="/" render={() => (
           <SetupPage
-            gameSettings={this.state.gameSettings}
-            updateGameSettings={this.updateGameSettings}
-            title={"SETTINGS"}
             authenticate={this.authenticate}
             logout={this.logout}
             user={this.state.user}
