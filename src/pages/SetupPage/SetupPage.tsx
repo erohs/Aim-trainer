@@ -6,13 +6,11 @@ import GameStart from '../../components/GameStart/GameStart';
 import { ISetupPageProps } from './interfaces/ISetupPageProps'
 
 class SetupPage extends React.Component<ISetupPageProps> {
-
     render() {
         return (
             <>
                 <NavigationBar />
                 <div className="setup-page" >
-
                     <h2 className="setup-page--title">SETTINGS</h2>
                     <GameSettings />
                     <GameStart
