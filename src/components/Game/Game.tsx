@@ -22,21 +22,19 @@ class Game extends React.Component {
             misses: 0,
             hits: 0
         },
-        score: 0
+        score: 0,
+        timer: 0
     }
 
     speed: any;
 
     tick() {
-        if (this.state.settings.duration <= 0) {
+        if (this.state.timer <= 0) {
             this.transition();
             return;
         }
         this.addTarget();
-        const settings = { ...this.state.settings };
-        settings.duration = this.state.settings.duration - (0.001 * this.state.settings.difficulty);
-        this.setState({ settings });
-
+        this.setState({ timer: this.state.timer - (0.001 * this.state.settings.difficulty) });
     }
 
     transition() {
@@ -61,6 +59,7 @@ class Game extends React.Component {
         }
         const settings = JSON.parse(localStorage.getItem("settings") || '{}');
         this.setState({ settings: settings });
+        this.setState({ timer: settings.duration })
     }
 
     componentWillUnmount() {
