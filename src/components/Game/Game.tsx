@@ -3,30 +3,14 @@ import './style/Game.css';
 import Target from '../Target/Target';
 import Countdown from '../Countdown/Countdown';
 import GameOver from '../GameOver/GameOver';
-import { IStateTypes } from '../../App';
-import { Values } from '../GameSettings/GameSettings';
-import { isNullOrUndefined } from 'util';
+import { IGameState } from './interfaces/IGameState';
+import { setDefaultSettings } from '../../helpers/SettingsHelper';
 
-interface IGameProps {
-    gameSettings: IStateTypes<string>
-    user: IStateTypes<any>
-};
+class Game extends React.Component {
 
-interface IState {
-    targets: IStateTypes<any>
-    settings: IStateTypes<any>
-    playing: boolean
-    gameover: boolean
-    targetCount: IStateTypes<number>
-    clickCount: IStateTypes<number>
-}
-
-class Game extends React.Component<IGameProps> {
-
-    state: IState = {
+    state: IGameState = {
         targets: {},
         settings: {},
-        playing: false,
         gameover: false,
         targetCount: {
             total: 0,
@@ -37,80 +21,75 @@ class Game extends React.Component<IGameProps> {
             total: 0,
             misses: 0,
             hits: 0
-        }
+        },
+        score: 0
     }
 
     speed: any;
 
     tick() {
-        const current = this.state.settings.Duration;
-        if (current <= 0) {
+        if (this.state.settings.duration <= 0) {
             this.transition();
-        } else if (this.state.playing === true) {
-            const settings = { ...this.state.settings };
-            settings["Duration"] = current - (0.001 * this.state.settings.Difficulty);
-            this.setState({ settings });
-            this.addTarget();
+            return;
         }
+        this.addTarget();
+        const settings = { ...this.state.settings };
+        settings.duration = this.state.settings.duration - (0.001 * this.state.settings.difficulty);
+        this.setState({ settings });
+
     }
 
     transition() {
+        this.setGameState("gameover", true)
         this.setTargetCount("misses");
         this.setClickCount("total")
         clearInterval(this.speed);
-        this.setGameState("gameover", true)
+        this.calculateScore()
     }
 
-    setColour = (colour: string) => {
-        let output: string = "#FF0000";
-        const re = /[0-9A-Fa-f]{6}/g;
-        if (!isNullOrUndefined(colour) && re.test(colour)) output = colour;
-        return output;
-    }
-
-    manageSettings = () => {
-        let settings = { ...this.state.settings }
-        Object.keys(this.props.gameSettings).forEach((key) => {
-            key === "TargetColour" ? settings[key] = this.setColour(this.props.gameSettings[key].toString()) : settings[key] = Values[key][this.props.gameSettings[key]];
-        })
-        this.setState({ settings })
-        this.speed = setInterval(() => this.tick(), settings.Difficulty);
+    calculateScore = () => {
+        let calculatedScore = this.state.targetCount.hits - this.state.clickCount.misses;
+        calculatedScore = (calculatedScore * 1000) / this.state.settings.difficulty;
+        calculatedScore = calculatedScore * + this.state.settings.duration;
+        calculatedScore = calculatedScore * this.state.settings.sizes;
+        this.setState({ score: calculatedScore });
     }
 
     componentDidMount() {
-        this.manageSettings()
+        if (localStorage.getItem("settings") === null) {
+            setDefaultSettings();
+        }
+        const settings = JSON.parse(localStorage.getItem("settings") || '{}');
+        this.setState({ settings: settings });
     }
 
     componentWillUnmount() {
         clearInterval(this.speed);
     }
 
+    startGame = () => {
+        this.speed = setInterval(() => this.tick(), this.state.settings.difficulty);
+    }
+
     setTargetCount = (name: string) => {
         const targetCount = { ...this.state.targetCount }
         targetCount[name] = targetCount[name] + 1;
-
-        if (name === "misses") {
-            targetCount[name] = targetCount["total"] - targetCount["hits"]
-        }
-
+        if (name === "misses") targetCount[name] = targetCount["total"] - targetCount["hits"];
         this.setState({ targetCount });
     }
 
     setClickCount = (name: string) => {
         const clickCount = { ...this.state.clickCount }
-        clickCount[name] = clickCount[name] + 1;
-
-        if (name === "total") {
-            clickCount[name] = clickCount["misses"] + clickCount["hits"]
-        }
-
+        if (this.state.targetCount.total > 0) clickCount[name] = clickCount[name] + 1;
+        if (name === "total") clickCount[name] = clickCount["misses"] + clickCount["hits"]
         this.setState({ clickCount });
     }
 
     addTarget = () => {
         var key = Date.now();
         var targets = { ...this.state.targets };
-        var position = this.randomPosition();
+        const area = document.getElementsByClassName('game-area')[0] as HTMLDivElement;
+        var position = this.randomPosition(area);
         targets[key] = <Target key={key} index={key} targets={this.state.targets} removeOnClick={this.removeOnClick} position={position} settings={this.state.settings} />;
         this.setTargetCount("total")
         this.setState({ targets }, () => {
@@ -135,9 +114,8 @@ class Game extends React.Component<IGameProps> {
         this.setClickCount("hits");
     }
 
-    randomPosition = () => {
-        const area = document.getElementsByClassName('game-area')[0] as HTMLDivElement;
-        const offset = this.state.settings.Sizes;
+    randomPosition = (area: HTMLDivElement) => {
+        const offset = this.state.settings.sizes;
         const rect = area.getBoundingClientRect();
         const minx = rect.left + offset;
         const maxx = rect.right - offset;
@@ -157,26 +135,25 @@ class Game extends React.Component<IGameProps> {
     }
 
     render() {
-        var gameAreaStyle = {
-            cursor: this.state.settings.Cursor
+        const gameAreaStyle = {
+            cursor: this.state.settings.cursor
         }
 
-        if (this.state.playing === false && this.state.gameover === false) {
-            return (
-                <div style={gameAreaStyle} className="game-area">
-                    <Countdown setGameState={this.setGameState} />
-                </div>
-            )
-        } else if (this.state.gameover === false) {
+        if (this.state.gameover === false) {
             return (
                 <div style={gameAreaStyle} onClick={() => this.setClickCount("misses")} className="game-area">
+                    <Countdown startGame={this.startGame} />
                     {Object.keys(this.state.targets).map(key => (this.state.targets[key]))}
                 </div>
             )
         } else {
             return (
                 <div className="game-area">
-                    <GameOver clickCount={this.state.clickCount} targetCount={this.state.targetCount} />
+                    <GameOver
+                        clickCount={this.state.clickCount}
+                        targetCount={this.state.targetCount}
+                        score={this.state.score}
+                    />
                 </div>
             )
         }

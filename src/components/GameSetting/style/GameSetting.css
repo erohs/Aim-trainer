@@ -7,7 +7,7 @@
     min-height: 60px;
     display: flex;
     min-width: 500px;
-    padding: var(--s-padding-v);
+    padding: var(--xs-padding) 0;
 }
 
 .game-setting--container:nth-last-child(1):nth-child(odd) {
@@ -22,6 +22,7 @@
 }
 
 .game-setting--name {
+    text-transform: capitalize;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -36,27 +37,34 @@
     justify-content: space-between;
     align-items: center;
     padding: var(--m-padding-h);
-    border: var(--default-border);
-    border-left: 0;
+    background-color: var(--secondary-bg-color);
     border-radius: var(--border-radius-right);
     flex-grow: 1;
 }
 
 .game-setting--arrows {
     display: flex;
-    flex-direction: column;
 }
 
 .game-setting--arrow {
-    font-size: 0.8em;
+    font-size: 18px;
     margin: 2px 0;
-    background-color: var(--main-bg-color);
+    background-color: var(--secondary-bg-color);
     border: var(--accent-border);
     border-radius: 3px;
     cursor: pointer;
     text-decoration: none;
-    padding: 1px 3px;
+    
+    margin:  0 0 0 6px;
     color: var(--main-fg-color);
+}
+
+.game-setting--arrow.left{ 
+    padding: 1px 6px 1px 3px;
+}
+
+.game-setting--arrow.right{ 
+    padding: 1px 3px 1px 6px;
 }
 
 .game-setting--arrow:hover {
@@ -66,6 +74,8 @@
 .game-setting--input {
     background-color: var(--main-bg-color);
     border: none;
+    border-radius: var(--border-radius);
+    padding: var(--xs-padding);
     color: var(--main-fg-color);
     flex-grow: 1;
 }
@@ -75,4 +85,5 @@
     border-radius: 100px;
     width: 30px;
     height: 30px;
+    margin: 0 14.5px 0 34.5px;
 }

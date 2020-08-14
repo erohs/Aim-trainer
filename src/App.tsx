@@ -1,25 +1,25 @@
 import React from 'react';
-import PageContainer from './pages/PageContainer/PageContainer';
+import SetupPage from './pages/SetupPage/SetupPage';
 import GamePage from './pages/GamePage/GamePage';
+import LeaderBoardPage from './pages/LeaderboardPage/LeaderboardPage';
 import { defaults } from './components/GameSettings/GameSettings';
 import { firebaseApp } from './base';
 import firebase from 'firebase';
+import { Route, Redirect, Switch } from "react-router-dom";
+import NotFound from './pages/NotFound/NotFound';
+import ResultsPage from './pages/ResultsPage/ResultsPage';
 
 export interface IStateTypes<TValue> {
   [key: string]: TValue
 }
 
 interface IState {
-  gameSettings: IStateTypes<string>
   user: IStateTypes<any>;
-  playing: boolean
 }
 
 class App extends React.Component {
   state: IState = {
-    gameSettings: {},
     user: {},
-    playing: false
   }
 
   componentDidMount() {
@@ -36,15 +36,6 @@ class App extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    localStorage.setItem("gameSettings", JSON.stringify(this.state.gameSettings))
-  }
-
-  updateGameSettings = (gameSetting: IStateTypes<string>) => {
-    let gameSettings = { ...this.state.gameSettings };
-    gameSettings[Object.keys(gameSetting)[0]] = Object.values(gameSetting)[0];
-    this.setState({ gameSettings });
-  }
 
   authHandler = async (authData: any) => {
     let docRef = firebase.firestore().collection('users').doc(authData.user.uid);
@@ -69,26 +60,6 @@ class App extends React.Component {
     });
   }
 
-  updateHighscore = (uid: string, score: string) => {
-    let docRef = firebase.firestore().collection('users').doc(uid);
-
-    let user = {
-      ...this.state.user,
-      "highscore": score
-    }
-
-    docRef.set({ ...user }, { merge: true });
-
-    firebase.firestore().collection('users').get().then((snapshot) => {
-      snapshot.docs.forEach(doc => {
-        if (doc.id === uid) {
-          let items = doc.data();
-          this.setState({ user: items })
-        }
-      });
-    });
-  }
-
   authenticate = (provider: firebase.auth.OAuthProvider) => {
     firebaseApp.auth().signInWithPopup(provider).then(this.authHandler);
   }
@@ -98,39 +69,25 @@ class App extends React.Component {
     this.setState({ user: {} })
   }
 
-  startGame = () => {
-    this.setState({ playing: true });
-  }
-
-  endGame = () => {
-    this.setState({ playing: false });
-  }
-
   render() {
-    if (this.state.playing === false) {
-      return (
-        <PageContainer
-          gameSettings={this.state.gameSettings}
-          updateGameSettings={this.updateGameSettings}
-          title={"SETTINGS"}
-          authenticate={this.authenticate}
-          logout={this.logout}
-          user={this.state.user}
-          startGame={this.startGame}
-          playing={this.state.playing}
-          endGame={this.endGame}
-        />
-      );
-    } else {
-      return (
-        <GamePage
-          playing={this.state.playing}
-          endGame={this.endGame}
-          gameSettings={this.state.gameSettings}
-          user={this.state.user}
-        />
-      )
-    }
+    return (
+      <Switch>
+        <Route exact path="/" render={() => (
+          <SetupPage
+            authenticate={this.authenticate}
+            logout={this.logout}
+            user={this.state.user}
+          />
+        )} />
+        <Route exact path="/play" render={() => (
+          <GamePage user={this.state.user} />
+        )} />
+        <Route exact path="/leaderboard" component={LeaderBoardPage} />
+        <Route exact path="/results" component={ResultsPage} />
+        <Route path="/404" component={NotFound} />
+        <Redirect to="/404" />
+      </Switch>
+    )
   }
 }
 
