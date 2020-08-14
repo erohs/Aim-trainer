@@ -1,11 +1,8 @@
 import React from 'react';
 import './style/Logo.css';
+import { ILogoProps } from './interfaces/ILogoProps';
 
-type LogoProps = {
-    size: number
-};
-
-class Logo extends React.Component<LogoProps> {
+class Logo extends React.Component<ILogoProps> {
     render() {
         var logoStyle = {
             fontSize: `${this.props.size}px`

@@ -2,6 +2,7 @@
  .toggle-switch {
     position: relative;
     display: inline-block;
+    margin-right: 3.5px;
     width: 56px;
     height: 30px;
   }
@@ -21,16 +22,18 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--border-color);
+    background-color: var(--secondary-bg-color);
+    border: var(--accent-border);
     -webkit-transition: .4s;
     transition: .4s;
+    
   }
   
   .toggle-switch--slider:before {
     position: absolute;
     content: "";
-    height: 22px;
-    width: 22px;
+    height: 18px;
+    width: 18px;
     left: 4px;
     bottom: 4px;
     background-color: var(--main-fg-color);
@@ -54,9 +57,9 @@
   
   /* Rounded sliders */
   .toggle-switch--slider.round {
-    border-radius: 34px;
+    border-radius: var(--border-radius);
   }
   
   .toggle-switch--slider.round:before {
-    border-radius: 50%;
+    border-radius: var(--border-radius);
   } 

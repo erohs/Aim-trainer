@@ -1,0 +1,5 @@
+.leader-board--title {
+    margin: var(--l-padding-v);
+    text-align: center;
+    font-size: var(--title-font-size);
+}
