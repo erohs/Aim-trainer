@@ -10,7 +10,7 @@ class GamePage extends React.Component<IGameProps> {
             <>
                 <NavigationBar />
                 <div className="game-container">
-                    <Game gameSettings={this.props.gameSettings} />
+                    <Game />
                 </div>
             </>
         )

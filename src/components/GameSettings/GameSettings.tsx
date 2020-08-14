@@ -5,6 +5,7 @@ import { IStateTypes } from '../../App';
 import { IGameSettingsValues } from './interfaces/ISettings';
 import { IGameSettingsState } from './interfaces/IGameSettingsState';
 import { Settings } from './Settings';
+import { setDefaultSettings } from '../../helpers/SettingsHelper';
 
 export var defaults: IStateTypes<string> = {
     "Difficulty": "Medium",
@@ -45,19 +46,10 @@ class GameSettings extends React.Component {
 
     componentDidMount() {
         if (localStorage.getItem("settings") === null) {
-            this.setDefaultSettings();
+            setDefaultSettings();
         }
         const settings = JSON.parse(localStorage.getItem("settings") || '{}');
         this.setState({ settings: settings });
-    }
-
-    setDefaultSettings = () => {
-        let defaultSettings: IStateTypes<string | number | boolean> = {};
-        for (const setting in Settings) {
-            var index: number = Settings[setting].defaultIndex;
-            defaultSettings[setting] = Settings[setting].values[index];
-        };
-        localStorage.setItem("settings", JSON.stringify(defaultSettings));
     }
 
     componentDidUpdate() {

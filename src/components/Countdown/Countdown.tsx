@@ -27,8 +27,8 @@ class Countdown extends React.Component<ICountdownProps> {
 
     transition() {
         clearInterval(this.timer);
-        this.setState({ display: "none" })
-        this.props.setGameState("playing", true)
+        this.setState({ display: "none" });
+        this.props.startGame();
     }
 
     render() {
