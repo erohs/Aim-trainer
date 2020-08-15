@@ -71,22 +71,24 @@ class App extends React.Component {
 
   render() {
     return (
-      <Switch>
-        <Route exact path="/" render={() => (
-          <SetupPage
-            authenticate={this.authenticate}
-            logout={this.logout}
-            user={this.state.user}
-          />
-        )} />
-        <Route exact path="/play" render={() => (
-          <GamePage user={this.state.user} />
-        )} />
-        <Route exact path="/leaderboard" component={LeaderBoardPage} />
-        <Route exact path="/results" component={ResultsPage} />
-        <Route path="/404" component={NotFound} />
-        <Redirect to="/404" />
-      </Switch>
+      <div id='app' className="dark-theme">
+        <Switch >
+          <Route exact path="/" render={() => (
+            <SetupPage
+              authenticate={this.authenticate}
+              logout={this.logout}
+              user={this.state.user}
+            />
+          )} />
+          <Route exact path="/play" render={() => (
+            <GamePage user={this.state.user} />
+          )} />
+          <Route exact path="/leaderboard" component={LeaderBoardPage} />
+          <Route exact path="/results" component={ResultsPage} />
+          <Route path="/404" component={NotFound} />
+          <Redirect to="/404" />
+        </Switch>
+      </div>
     )
   }
 }

@@ -11,8 +11,8 @@
     border: var(--default-border);
     border-radius: var(--border-radius);
     padding: var(--s-padding-v);
-    color: var(--main-fg-color);
-    background-color: var(--main-bg-color);
+    color: var(--text-color);
+    background-color: var(--bg-color);
     min-width: 200px;
     margin: var(--s-padding-v);
 }

@@ -8,6 +8,26 @@ export interface IResults {
     settings: IStateTypes<string | number | boolean>
 }
 
+export const defaultResults: IResults = {
+    score: 0,
+    combo: 1,
+    targets: {
+        total: 0,
+        hits: 0,
+        missed: 0,
+        perSecond: 0,
+        efficiency: 0
+    },
+    clicks: {
+        total: 0,
+        hits: 0,
+        missed: 0,
+        perSecond: 0,
+        accuracy: 0
+    },
+    settings: {}
+}
+
 const resetCombo = (results: IResults) => {
     let newResults = { ...results };
     newResults.combo = 1;
@@ -73,6 +93,12 @@ export const setDefaultResults = (results: IResults, settings: IStateTypes<strin
     let newSettings = { ...settings }
     newResults.settings = newSettings;
     return newResults;
+}
+
+export const storeDefaultResults = (settings: IStateTypes<string | number | boolean>) => {
+    const newSettings = { ...settings }
+    defaultResults.settings = newSettings
+    localStorage.setItem("settings", JSON.stringify(defaultResults));
 }
 
 export const updateHits = (timer: number, results: IResults) => {

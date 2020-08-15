@@ -5,12 +5,12 @@ import Countdown from '../Countdown/Countdown';
 import { IGameState } from './interfaces/IGameState';
 import { setDefaultSettings } from '../../helpers/SettingsHelper';
 import * as ResultsHelper from '../../helpers/ResultsHelper';
+import { Redirect } from 'react-router-dom';
 
 class Game extends React.Component {
     state: IGameState = {
         targets: {},
         settings: {},
-        gameover: false,
         results: {
             score: 0,
             combo: 1,
@@ -30,6 +30,7 @@ class Game extends React.Component {
             },
             settings: {}
         },
+        redirect: false,
         timer: 0
     }
 
@@ -46,8 +47,9 @@ class Game extends React.Component {
     }
 
     transition() {
-        this.setGameState("gameover", true)
         clearInterval(this.speed);
+        localStorage.setItem("results", JSON.stringify(this.state.results));
+        this.setState({ redirect: true })
     }
 
     componentDidMount() {
@@ -122,20 +124,15 @@ class Game extends React.Component {
             cursor: this.state.settings.cursor
         }
 
-        if (this.state.gameover === false) {
-            return (
-                <div style={gameAreaStyle} onClick={() => this.setState({ results: ResultsHelper.updateClicksMissed(this.state.timer, this.state.results) })} className="game-area">
-                    <Countdown startGame={this.startGame} />
-                    {Object.keys(this.state.targets).map(key => (this.state.targets[key]))}
-                </div>
-            )
-        } else {
-            return (
-                <div className="game-area">
-                    oop
-                </div>
-            )
-        }
+        if (this.state.redirect) return <Redirect to="/results" />
+
+        return (
+            <div style={gameAreaStyle} onClick={() => this.setState({ results: ResultsHelper.updateClicksMissed(this.state.timer, this.state.results) })} className="game-area">
+                <Countdown startGame={this.startGame} />
+                {Object.keys(this.state.targets).map(key => (this.state.targets[key]))}
+            </div>
+        )
+
     }
 }
 
