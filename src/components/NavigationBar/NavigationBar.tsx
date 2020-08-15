@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from '../Logo/Logo';
 import './style/NavigationBar.css';
 import { Link } from 'react-router-dom';
+import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
 
 class NavigationBar extends React.Component {
     render() {
@@ -23,6 +24,7 @@ class NavigationBar extends React.Component {
                 <ul>
                     <li ><Link className="navigation-bar--link" to="/" >Home</Link></li>
                     <li ><Link className="navigation-bar--link" to="/leaderboard" >Leaderboard</Link></li>
+                    <li className="navigation-bar--theme-switch"><ThemeSwitch /></li>
                 </ul>
             </div>
         )

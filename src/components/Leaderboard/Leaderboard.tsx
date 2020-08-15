@@ -32,7 +32,7 @@ class Leaderboard extends React.Component {
                     return (
                         <LeaderboardRow
                             index={index + 1}
-                            key={highscore.id}
+                            key={index}
                             name={highscore.id}
                             highscore={highscore.highscore}
                         />

@@ -5,7 +5,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--secondary-bg-color);
+    background-color: var(--nav-color);
+    box-shadow: var(--nav-shadow);
+    color: var(--nav-text-color);
+}
+
+.navigation-bar--theme-switch {
+    width: 20px;
+    height: 20px;
 }
 
 .navigation-bar > * {
@@ -24,7 +31,7 @@
 .navigation-bar--link {
     text-decoration: none;
     background: none;
-    color: var(--main-fg-color);
+    color: var(--nav-text-color);
 }
 
 .navigation-bar--link:hover {
@@ -34,15 +41,15 @@
 
 .navigation-bar--end-game {
     cursor: pointer;
-    border: var(--accent-border);
     border-radius: var(--border-radius);
-    background-color: var(--secondary-bg-color);
-    color: var(--main-fg-color);
+    background-color: var(--accent-color);
+    color: var(--cards-text-color);
     padding: var(--s-padding-v);
     width: 150px;
     margin: var(--s-padding-h);
+    box-shadow: var(--card-shadow);
 }
 
 .navigation-bar--end-game:hover {
-    background-color: var(--accent-color);
-}
+    background-color: var(--accent-color-hover);
+} 

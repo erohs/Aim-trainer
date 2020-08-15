@@ -26,8 +26,11 @@ body, input {
 	font-family: 'Open Sans', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	color: var(--main-fg-color);
-	background-color: var(--main-bg-color);
+}
+
+html, body, #app {
+	min-height: 100vh;
+	overflow: auto;
 }
 
 code {

@@ -76,8 +76,8 @@
 .game-over--name-input {
     border: var(--default-border);
     border-radius: var(--border-radius-left);
-    background-color: var(--main-bg-color);
-    color: var(--main-fg-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -98,7 +98,7 @@
 
 .game-over--name-submit {
     font-weight: bold;
-    color: var(--main-fg-color);
+    color: var(--text-color);
     border-radius: var(--border-radius-right);
     border: var(--default-border);
     border-left: 0;
@@ -110,7 +110,7 @@
 
 .game-over--name-submit:disabled {
     background-color: var(--border-color);
-    color: var(--main-bg-color);
+    color: var(--bg-color);
 }
 
 .game-over--name-submit:disabled:hover {
