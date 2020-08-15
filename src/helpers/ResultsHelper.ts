@@ -1,32 +1,12 @@
 import { IStateTypes } from '../App';
 
-interface IResults {
+export interface IResults {
     score: number,
     combo: number,
     targets: IStateTypes<number>,
     clicks: IStateTypes<number>,
     settings: IStateTypes<string | number | boolean>
 }
-
-const defaultResults: IResults = {
-    score: 0,
-    combo: 1,
-    targets: {
-        total: 0,
-        hit: 0,
-        missed: 0,
-        perSecond: 0,
-        efficiency: 0
-    },
-    clicks: {
-        total: 0,
-        hit: 0,
-        missed: 0,
-        perSecond: 0,
-        accuracy: 0
-    },
-    settings: {}
-};
 
 const resetCombo = (results: IResults) => {
     let newResults = { ...results };
@@ -82,16 +62,17 @@ const calculateScore = (results: IResults) => {
     let newResults = { ...results };
     const difficultyMultiplyer = 1 / (newResults.settings.difficulty as number / 1000); // 1 1.25, 1.66, 2.5
     const durationMultiplyer = 1 + (0.1 * (newResults.settings.duration as number / 10)); //1.5, 3, 6, 9, 12
-    const sizeMultiplyer = 1 + (1 / (1 + (0.1 * (newResults.settings.size as number / 10))));
+    const sizeMultiplyer = 1 + (1 / (1 + (0.1 * (newResults.settings.sizes as number / 10))));
     const score = 1 * difficultyMultiplyer * durationMultiplyer * sizeMultiplyer * newResults.combo;
     newResults.score += score;
     return newResults;
 }
 
-export const setDefaultResults = (settings: IStateTypes<string | number | boolean>) => {
-    let newResults = { ...defaultResults }
-    newResults.settings = settings;
-    return defaultResults;
+export const setDefaultResults = (results: IResults, settings: IStateTypes<string | number | boolean>) => {
+    let newResults = { ...results }
+    let newSettings = { ...settings }
+    newResults.settings = newSettings;
+    return newResults;
 }
 
 export const updateHits = (timer: number, results: IResults) => {
