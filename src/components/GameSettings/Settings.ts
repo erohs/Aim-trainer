@@ -2,6 +2,12 @@ import { ISettings } from './interfaces/ISettings';
 import { SettingTypes } from '../../enums';
 
 export let Settings: ISettings = {
+    gamemode: {
+        types: ["Standard", "Flick"],
+        values: ["standard", "flick"],
+        type: SettingTypes.select,
+        default: "standard"
+    },
     difficulty: {
         types: ["Easy", "Medium", "Hard", "Very Hard"],
         values: [1000, 800, 600, 400],
@@ -26,12 +32,12 @@ export let Settings: ISettings = {
         type: SettingTypes.select,
         default: "crosshair"
     },
-    sound: {
-        types: ["On", "Off"],
-        values: [true, false],
-        type: SettingTypes.toggle,
-        default: true
-    },
+    // sound: {
+    //     types: ["On", "Off"],
+    //     values: [true, false],
+    //     type: SettingTypes.toggle,
+    //     default: true
+    // },
     colour: {
         types: ["Default"],
         values: ["#FF0000"],

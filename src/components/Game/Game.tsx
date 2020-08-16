@@ -48,6 +48,7 @@ class Game extends React.Component {
 
     transition() {
         clearInterval(this.speed);
+        this.setState({ results: ResultsHelper.sanitizeResults(this.state.results) });
         localStorage.setItem("results", JSON.stringify(this.state.results));
         this.setState({ redirect: true })
     }

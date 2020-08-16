@@ -44,7 +44,7 @@ class GameOver extends React.Component<IGameOverProps> {
                 <div className="game-over--name-container">
                     <div className="game-over--details-container">
                         <input onChange={this.handleChange} value={this.state.name} placeholder="Enter name..." type="text" className="game-over--name-input" />
-                        <Link className="game-over--name-link" to="/leaderboard" >
+                        <Link tabIndex={-1} className="game-over--name-link" to="/leaderboard" >
                             <button className="game-over--name-submit" onClick={this.continue} disabled={!this.state.name}>Submit</button>
                         </Link>
 

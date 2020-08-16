@@ -25,6 +25,11 @@
     --switch-color: #D8D8D8;
     --toggled-color: #514BE9;
 
+    --disabled: #424242;
+    --disabled-text: #1D1D1D;
+
+    --results-content-text: #514BE9;
+
     --nav-shadow: 0 4px 4px -2px rgba(0,0,0,0.23);
     --card-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.24);
     color: var(--text-color);
@@ -33,7 +38,7 @@
 }
 
 .light-theme {
-    --bg-color: #fafafa;
+    --bg-color: #ececec;
     --text-color: #202020;
     --accent-color: #514BE9;
     --accent-color-hover: #736eff;
@@ -53,11 +58,16 @@
     
     --slider-color: #bebebe;
     --switch-color: #514BE9;
-    --toggled-color: #FFFFFF;
+    --toggled-color: #ececec;
 
     --game-border:  2px solid #bebebe;
     --default-border: 2px solid #424242;
     --accent-border: 2px solid #514BE9;
+
+    --disabled: #bebebe;
+    --disabled-text: #424242;
+
+    --results-content-text: #FFFFFF;
 
     --nav-shadow: 0 4px 4px -2px rgba(0,0,0,0.23);
     --card-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.24);
@@ -91,4 +101,8 @@
     --xs-padding: 5px;
     --xxs-padding: 2px;
     --xxxs-padding: 1px;
+
+    --results-3-cards: 1080px;
+    --results-2-cards: 720px;
+    --results-1-card: 360px;
 }

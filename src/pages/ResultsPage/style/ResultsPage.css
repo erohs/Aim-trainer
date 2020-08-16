@@ -1,0 +1,106 @@
+.results-page {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.results-page--title {
+    margin: var(--l-padding-v);
+    text-align: center;
+    font-size: var(--title-font-size);
+}
+
+.results-page--options {
+    display: flex;
+    margin: 0 auto;
+    width: var(--results-3-cards);
+    flex-wrap: wrap;
+    margin-bottom: var(--s-padding);
+}
+
+.results-page--play-again {
+    margin: var(--s-padding);
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    background-color: var(--accent-color);
+    color: var(--cards-text-color);
+    padding: var(--s-padding-v);
+    width: 160px;
+    box-shadow: var(--card-shadow);
+}
+
+.results-page--play-again:hover {
+    background-color: var(--accent-color-hover);
+}
+
+.results-page--setup {
+    margin: var(--s-padding);
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    background-color: var(--accent-color);
+    color: var(--cards-text-color);
+    padding: var(--s-padding-v);
+    width: 160px;
+    box-shadow: var(--card-shadow);
+}
+
+.results-page--setup:hover {
+    background-color: var(--accent-color-hover);
+} 
+
+.results-page--save {
+    margin: var(--s-padding);
+    display: flex;
+    flex-grow: 1;
+    box-shadow: var(--card-shadow);
+}
+
+.results-page--save-input {
+    border-radius: var(--border-radius-left);
+    background-color: var(--nav-color);
+    color: var(--text-color);
+    padding: var(--s-padding);
+    flex-grow: 1;
+}
+
+.results-page--save-submit {
+    cursor: pointer;
+    border-radius: var(--border-radius-right);
+    background-color: var(--accent-color);
+    color: var(--cards-text-color);
+    padding: var(--s-padding-v);
+    width: 100px;
+}
+
+.results-page--save-submit:disabled {
+    background-color: var(--disabled);
+    color: var(--disabled-text)
+}
+
+.results-page--save-submit:disabled:hover {
+    background-color: var(--disabled);
+    cursor: not-allowed;
+}
+
+.results-page--save-submit:hover {
+    background-color: var(--accent-color-hover);
+}
+
+@media only screen and (max-width: 1096px) {
+    .results-page--options {
+        width: var(--results-2-cards);
+    }
+    
+    .results-page--play-again {
+        width: 340px;
+    }
+
+    .results-page--setup {
+        width: 340px;
+    }
+}
+
+@media only screen and (max-width: 736px) {
+    .results-page--options {
+        width: var(--results-1-card);
+    }
+}

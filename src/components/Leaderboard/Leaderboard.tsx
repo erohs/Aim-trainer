@@ -3,8 +3,9 @@ import './style/LeaderBoard.css';
 import firebase from 'firebase';
 import LeaderboardRow from '../LeaderboardRow/LeaderboardRow';
 import { ILeaderboardState } from './interfaces/ILeaderboardState';
+import { ILeaderboardProps } from './interfaces/ILeaderboardProps';
 
-class Leaderboard extends React.Component {
+class Leaderboard extends React.Component<ILeaderboardProps> {
 
     state: ILeaderboardState = {
         highscores: []
@@ -14,8 +15,13 @@ class Leaderboard extends React.Component {
         this.getLeaderBoard();
     }
 
+    componentDidUpdate() {
+        this.getLeaderBoard();
+    }
+
     getLeaderBoard = async () => {
-        const events = await firebase.firestore().collection('highscores').orderBy("highscore", "desc")
+        const collection = `${this.props.leaderboard}Highscores`;
+        const events = await firebase.firestore().collection(collection).orderBy("results.score", "desc")
         // .limit(10); an add to limit it
         events.get().then((querySnapshot) => {
             const tempDoc = querySnapshot.docs.map((doc) => {
@@ -23,6 +29,7 @@ class Leaderboard extends React.Component {
             });
             this.setState({ highscores: tempDoc });
         });
+        console.log(this.state)
     }
 
     render() {
@@ -34,7 +41,7 @@ class Leaderboard extends React.Component {
                             index={index + 1}
                             key={index}
                             name={highscore.id}
-                            highscore={highscore.highscore}
+                            highscore={highscore.results.score.toString()}
                         />
                     )
                 })}

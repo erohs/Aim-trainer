@@ -12,7 +12,7 @@ class NotFound extends React.Component {
                     <h2 className="not-found--header">404</h2>
                     <h3 className="not-found--sub-header">Page not found</h3>
                     <p className="not-found--text">The page you are looking for does not exist</p>
-                    <Link to="/">
+                    <Link tabIndex={-1} to="/">
                         <button className="not-found--button">
                             Homepage
                         </button>
