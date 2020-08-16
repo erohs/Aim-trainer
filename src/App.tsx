@@ -2,7 +2,6 @@ import React from 'react';
 import SetupPage from './pages/SetupPage/SetupPage';
 import GamePage from './pages/GamePage/GamePage';
 import LeaderBoardPage from './pages/LeaderboardPage/LeaderboardPage';
-import { defaults } from './components/GameSettings/GameSettings';
 import { firebaseApp } from './base';
 import firebase from 'firebase';
 import { Route, Redirect, Switch } from "react-router-dom";
@@ -28,12 +27,6 @@ class App extends React.Component {
         this.authHandler({ user });
       }
     })
-
-    this.setState({ gameSettings: defaults });
-    const localStorageRef = localStorage.getItem("gameSettings");
-    if (localStorageRef) {
-      this.setState({ gameSettings: JSON.parse(localStorageRef) })
-    }
   }
 
 

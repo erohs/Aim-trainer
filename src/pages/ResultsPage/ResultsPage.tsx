@@ -1,9 +1,13 @@
 import React from 'react';
 import './style/ResultsPage.css';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
+import Results from '../../components/Results/Results';
 import { setDefaultSettings } from '../../helpers/SettingsHelper';
-import { storeDefaultResults } from '../../helpers/ResultsHelper';
+import { storeDefaultResults, IResults } from '../../helpers/ResultsHelper';
 import { IResultsPageState } from './interfaces/IResultsPageState';
+import { Link } from 'react-router-dom';
+import firebase from 'firebase';
+
 
 class ResultsPage extends React.Component {
     state: IResultsPageState = {
@@ -26,6 +30,7 @@ class ResultsPage extends React.Component {
             },
             settings: {}
         },
+        name: ""
     }
 
     componentDidMount() {
@@ -39,12 +44,45 @@ class ResultsPage extends React.Component {
         this.setState({ results })
     }
 
+    continue = () => {
+        this.updateLeaderBoard(this.state.name, this.state.results);
+    }
+
+    updateLeaderBoard = (name: string, results: IResults) => {
+        const collection = `${results.settings.gamemode}Highscores`;
+        localStorage.setItem("leaderboard", results.settings.gamemode.toString());
+        const docRef = firebase.firestore().collection(collection).doc(name);
+        let highscore = {
+            "results": results
+        }
+        docRef.set({ ...highscore }, { merge: true });
+    }
+
+    handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+        this.setState({ name: event.currentTarget.value });
+    }
+
     render() {
         return (
             <>
                 <NavigationBar />
                 <div className="results-page">
-                    <button onClick={() => console.log(this.state.results)}>clicks</button>
+                    <h2 className="results-page--title">RESULTS</h2>
+                    <Results results={this.state.results} />
+                </div>
+                <div className="results-page--options">
+                    <Link tabIndex={-1} to="/play" >
+                        <button className="results-page--play-again" >Play Again</button>
+                    </Link>
+                    <Link tabIndex={-1} to="/" >
+                        <button className="results-page--setup" >Setup</button>
+                    </Link>
+                    <div className="results-page--save">
+                        <input onChange={this.handleChange} value={this.state.name} placeholder="Enter name..." type="text" className="results-page--save-input" />
+                        <Link tabIndex={-1} to="/leaderboard" >
+                            <button className="results-page--save-submit" onClick={this.continue} disabled={!this.state.name || this.state.results.targets.total === 0}>Save</button>
+                        </Link>
+                    </div>
                 </div>
             </>
         )

@@ -88,6 +88,20 @@ const calculateScore = (results: IResults) => {
     return newResults;
 }
 
+const roundNumber = (number: number) => {
+    return Math.round((number + Number.EPSILON) * 100) / 100;
+}
+
+export const sanitizeResults = (results: IResults) => {
+    let newResults = { ...results };
+    newResults.score = roundNumber(newResults.score);
+    newResults.targets.perSecond = roundNumber(newResults.targets.perSecond);
+    newResults.targets.efficiency = roundNumber(newResults.targets.efficiency);
+    newResults.clicks.perSecond = roundNumber(newResults.clicks.perSecond);
+    newResults.clicks.accuracy = roundNumber(newResults.clicks.accuracy);
+    return newResults
+}
+
 export const setDefaultResults = (results: IResults, settings: IStateTypes<string | number | boolean>) => {
     let newResults = { ...results }
     let newSettings = { ...settings }
@@ -98,7 +112,7 @@ export const setDefaultResults = (results: IResults, settings: IStateTypes<strin
 export const storeDefaultResults = (settings: IStateTypes<string | number | boolean>) => {
     const newSettings = { ...settings }
     defaultResults.settings = newSettings
-    localStorage.setItem("settings", JSON.stringify(defaultResults));
+    localStorage.setItem("results", JSON.stringify(defaultResults));
 }
 
 export const updateHits = (timer: number, results: IResults) => {

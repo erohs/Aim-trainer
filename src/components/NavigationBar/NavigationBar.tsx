@@ -11,7 +11,7 @@ class NavigationBar extends React.Component {
             return (
                 <div className="navigation-bar">
                     <Logo size={25} />
-                    <Link to="/" >
+                    <Link tabIndex={-1} to="/" >
                         <button className="navigation-bar--end-game" >End Game</button>
                     </Link>
                 </div>
