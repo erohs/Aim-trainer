@@ -46,16 +46,18 @@ class ResultsPage extends React.Component {
 
     continue = () => {
         this.updateLeaderBoard(this.state.name, this.state.results);
+        localStorage.removeItem("results");
     }
 
     updateLeaderBoard = (name: string, results: IResults) => {
         const collection = `${results.settings.gamemode}Highscores`;
         localStorage.setItem("leaderboard", results.settings.gamemode.toString());
-        const docRef = firebase.firestore().collection(collection).doc(name);
+        const docRef = firebase.firestore().collection(collection).doc(); //add users uid here when login is added
         let highscore = {
+            "name": name,
             "results": results
         }
-        docRef.set({ ...highscore }, { merge: true });
+        docRef.set({ ...highscore }, { merge: false });
     }
 
     handleChange = (event: React.FormEvent<HTMLInputElement>) => {

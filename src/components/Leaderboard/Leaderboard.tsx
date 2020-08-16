@@ -39,8 +39,8 @@ class Leaderboard extends React.Component<ILeaderboardProps> {
                     return (
                         <LeaderboardRow
                             index={index + 1}
-                            key={index}
-                            name={highscore.id}
+                            key={highscore.id}
+                            name={highscore.name}
                             highscore={highscore.results.score.toString()}
                         />
                     )
