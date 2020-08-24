@@ -1,4 +1,7 @@
+import { IResults } from "../../../helpers/ResultsHelper";
+
 export interface IHighscores {
     id: string;
-    highscore: string;
+    name: string;
+    results: IResults;
 }

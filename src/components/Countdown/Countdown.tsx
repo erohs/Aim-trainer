@@ -10,10 +10,14 @@ class Countdown extends React.Component<ICountdownProps> {
         display: "block"
     }
 
-    timer = setInterval(() => this.tick(), 1000);
+    timer: any;
 
     componentWillUnmount() {
         clearInterval(this.timer);
+    }
+
+    componentDidMount() {
+        this.timer = setInterval(() => this.tick(), 1000);
     }
 
     tick() {

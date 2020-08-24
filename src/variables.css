@@ -1,18 +1,50 @@
-:root {
-    --main-bg-color: #1A1D1B;
-    --main-bg-color-hover: #1A1D1B;
-    --secondary-bg-color: #2B2B2B;
-    --main-fg-color: #F2F2F2;
+.dark-theme {
     --accent-color: #514BE9;
+    --accent-color-hover: #736EFF;
+    --accent-foreground-color: #FFFFFF;
+    --primary-background-color: #121212;
+    --secondary-background-color: #1F1F1F;
+    --primary-foreground-color: #eeeeee;
+    --secondary-foreground-color: #eeeeee;
+    --first-position-color: #CC9000;
+    --second-position-color: #7A7A7F;
+    --third-position-color: #A66426;
+    --disabled: #424242;
+    --disabled-foreground: #121212;
     --border-color: #424242;
+    --border:  2px solid var(--border-color);
 
+    color: var(--primary-foreground-color);
+	background-color: var(--primary-background-color);
+}
+
+.light-theme {
+    --accent-color: #514BE9;
+    --accent-color-hover: #736EFF;
+    --accent-foreground-color: #FFFFFF;
+    --primary-background-color: #ECECEC;
+    --secondary-background-color: #FFFFFF;
+    --primary-foreground-color: #202020;
+    --first-position-color: #ffc744;
+    --second-position-color: #cacaf0;
+    --third-position-color: #e7994f;
+    --disabled: #bebebe;
+    --disabled-foreground: #424242;
+    --border-color: #929292;
+    --border: 2px solid var(--border-color);
+    
+    color: var(--primary-foreground-color);
+	background-color: var(--primary-background-color);
+}
+
+:root {
     --google-color: #DF4A32;
     --github-color: #444444;
     --twitter-color: #50ABF1;
     --facebook-color: #39579A;
 
-    --default-border: 2px solid #424242;
-    --accent-border: 2px solid #514BE9;
+    --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.24);
+    --bottom-shadow: 0 4px 4px -2px rgba(0,0,0,0.23);
 
     --border-radius: 3px;
     --border-radius-left: 3px 0 0 3px;
@@ -33,4 +65,8 @@
     --xs-padding: 5px;
     --xxs-padding: 2px;
     --xxxs-padding: 1px;
+
+    --results-3-cards: 1080px;
+    --results-2-cards: 720px;
+    --results-1-card: 360px;
 }

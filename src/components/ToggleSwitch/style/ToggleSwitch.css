@@ -2,9 +2,9 @@
  .toggle-switch {
     position: relative;
     display: inline-block;
-    margin-right: 3.5px;
-    width: 56px;
-    height: 30px;
+    margin-right: 1.5px;
+    width: 52px;
+    height: 26px;
   }
   
   /* Hide default HTML checkbox */
@@ -22,8 +22,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--secondary-bg-color);
-    border: var(--accent-border);
+    background-color: var(--slider-color);
     -webkit-transition: .4s;
     transition: .4s;
     
@@ -36,17 +35,17 @@
     width: 18px;
     left: 4px;
     bottom: 4px;
-    background-color: var(--main-fg-color);
+    background-color: var(--switch-color);
     -webkit-transition: .4s;
     transition: .4s;
   }
   
   input:checked + .toggle-switch--slider {
-    background-color: var(--accent-color);
+    background-color: var(--toggled-color);
   }
   
   input:focus + .toggle-switch--slider {
-    box-shadow: 0 0 1px var(--accent-color);
+    box-shadow: 0 0 1px var(--toggled-color);
   }
   
   input:checked + .toggle-switch--slider:before {
