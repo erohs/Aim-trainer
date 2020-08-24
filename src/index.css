@@ -13,7 +13,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video, input, button {
+time, mark, audio, video, input, button, select {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -22,7 +22,7 @@ time, mark, audio, video, input, button {
 	vertical-align: baseline;
 }
 
-body, input {
+body, input, select {
 	font-family: 'Open Sans', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

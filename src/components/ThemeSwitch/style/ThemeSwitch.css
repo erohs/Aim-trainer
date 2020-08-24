@@ -1,7 +1,7 @@
 
 .theme-switch--button {
     position: relative;
-    background-color: var(--nav-color);
+    background-color: var(--secondary-background-color);
     width: 20px;
     height: 20px;
     top: 4px;
@@ -18,16 +18,16 @@
 }
 
 .theme-switch--icon:hover {
-    fill: var(--nav-text-color);
+    fill: var(--primary-foreground-color);
 }
 
 
 .theme-switch--icon-sun {
-    fill: var(--nav-text-color);
+    fill: var(--primary-foreground-color);
     width: 20px;
     height: 20px;
 }
 
 .theme-switch--icon-sun:hover {
-    fill: var(--accent-color-hover);
+    fill: var(--accent-color);
 }

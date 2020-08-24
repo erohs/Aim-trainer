@@ -1,10 +1,27 @@
 .leaderboard-page--container {
-    width: 60%;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 var(--s-padding);
 }
 
 .leaderboard-page--title {
     margin: var(--l-padding-v);
     text-align: center;
     font-size: var(--title-font-size);
+}
+
+.leaderboard-page--options {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--m-padding-h);
+    height: 60px;
+    align-items: center;
+    background-color: var(--accent-color);
+    color: var(--accent-foreground-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.leaderboard-page--options-text {
+    font-weight: bold;
 }

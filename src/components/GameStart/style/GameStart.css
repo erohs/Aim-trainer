@@ -8,11 +8,11 @@
     cursor: pointer;
     border-radius: var(--border-radius);
     background-color: var(--accent-color);
-    color: var(--cards-text-color);
+    color: var(--accent-foreground-color);
     padding: var(--s-padding-v);
     width: 150px;
     margin: var(--s-padding-h);
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--shadow);
 }
 
 .game-start--button:hover {

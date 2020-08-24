@@ -8,37 +8,6 @@ class Results extends React.Component<IResultsProps> {
         return (
             <div className="results">
                 <div className="results--card">
-                    <h3 className="results--card-header">SETTINGS</h3>
-                    <div className="results--card-contents">
-                        <div className="results--card-rows">
-                            <div className="results--card-setting">
-                                <div className="results--card-row-setting-name">Gamemode</div>
-                                <div className="results--card-row-setting-value">
-                                    {Settings["gamemode"].types[Settings["gamemode"].values.indexOf(this.props.results.settings.gamemode)]}
-                                </div>
-                            </div>
-                            <div className="results--card-setting">
-                                <div className="results--card-row-setting-name">Difficulty</div>
-                                <div className="results--card-row-setting-value">
-                                    {Settings["difficulty"].types[Settings["difficulty"].values.indexOf(this.props.results.settings.difficulty)]}
-                                </div>
-                            </div>
-                            <div className="results--card-setting">
-                                <div className="results--card-row-setting-name">Sizes</div>
-                                <div className="results--card-row-setting-value">
-                                    {Settings["sizes"].types[Settings["sizes"].values.indexOf(this.props.results.settings.sizes)]}
-                                </div>
-                            </div>
-                            <div className="results--card-setting">
-                                <div className="results--card-row-setting-name">Duration</div>
-                                <div className="results--card-row-setting-value">
-                                    {Settings["duration"].types[Settings["duration"].values.indexOf(this.props.results.settings.duration)]}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="results--card">
                     <h3 className="results--card-header">SCORE</h3>
                     <div className="results--card-rows">
                         <div className="results--card-content">
@@ -102,6 +71,37 @@ class Results extends React.Component<IResultsProps> {
                         </div>
                         <div className="results--card-row">
                             {this.props.results.clicks.hits}/{this.props.results.clicks.total} Total
+                        </div>
+                    </div>
+                </div>
+                <div className="results--card">
+                    <h3 className="results--card-header">SETTINGS</h3>
+                    <div className="results--card-contents">
+                        <div className="results--card-rows">
+                            <div className="results--card-setting">
+                                <div className="results--card-row-setting-name">Gamemode</div>
+                                <div className="results--card-row-setting-value">
+                                    {Settings["gamemode"].types[Settings["gamemode"].values.indexOf(this.props.results.settings.gamemode)]}
+                                </div>
+                            </div>
+                            <div className="results--card-setting">
+                                <div className="results--card-row-setting-name">Difficulty</div>
+                                <div className="results--card-row-setting-value">
+                                    {Settings["difficulty"].types[Settings["difficulty"].values.indexOf(this.props.results.settings.difficulty)]}
+                                </div>
+                            </div>
+                            <div className="results--card-setting">
+                                <div className="results--card-row-setting-name">Sizes</div>
+                                <div className="results--card-row-setting-value">
+                                    {Settings["sizes"].types[Settings["sizes"].values.indexOf(this.props.results.settings.sizes)]}
+                                </div>
+                            </div>
+                            <div className="results--card-setting">
+                                <div className="results--card-row-setting-name">Duration</div>
+                                <div className="results--card-row-setting-value">
+                                    {Settings["duration"].types[Settings["duration"].values.indexOf(this.props.results.settings.duration)]}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

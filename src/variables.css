@@ -1,78 +1,41 @@
 .dark-theme {
-    --bg-color: #121212;
-    --text-color: #eeeeee;
     --accent-color: #514BE9;
-    --accent-color-hover: #736eff;
-    --border-color: #424242;
-    --gold: #CC9000;
-    --silver: #7A7A7F;
-    --bronze: #A66426;
-
-    --nav-color: #1F1F1F;
-    --nav-text-color: #D8D8D8;
-
-    --cards-color: #2e2e2e;
-    --secondary-cards-color: #1D1D1D;
-    --cards-text-color: #eeeeee;
-
-    --leaderboard-highscore-color: #514BE9;
-    
-    --game-border:  2px solid #424242;
-    --default-border: 2px solid #424242;
-    --accent-border: 2px solid #514BE9;
-
-    --slider-color: #121212;
-    --switch-color: #D8D8D8;
-    --toggled-color: #514BE9;
-
+    --accent-color-hover: #736EFF;
+    --accent-foreground-color: #FFFFFF;
+    --primary-background-color: #121212;
+    --secondary-background-color: #1F1F1F;
+    --primary-foreground-color: #eeeeee;
+    --secondary-foreground-color: #eeeeee;
+    --first-position-color: #CC9000;
+    --second-position-color: #7A7A7F;
+    --third-position-color: #A66426;
     --disabled: #424242;
-    --disabled-text: #1D1D1D;
+    --disabled-foreground: #121212;
+    --border-color: #424242;
+    --border:  2px solid var(--border-color);
 
-    --results-content-text: #514BE9;
-
-    --nav-shadow: 0 4px 4px -2px rgba(0,0,0,0.23);
-    --card-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.24);
-    color: var(--text-color);
-    background-color: var(--bg-color);
+    color: var(--primary-foreground-color);
+	background-color: var(--primary-background-color);
     
 }
 
 .light-theme {
-    --bg-color: #ececec;
-    --text-color: #202020;
     --accent-color: #514BE9;
-    --accent-color-hover: #736eff;
-    --border-color: #bebebe;
-    --gold: #ffc744;
-    --silver: #cacaf0;
-    --bronze: #e7994f;
-
-    --nav-color: #FFFFFF;
-    --nav-text-color: #202020;
-    
-    --cards-color: #736eff;
-    --secondary-cards-color: #514BE9;
-    --cards-text-color: #FFFFFF;
-
-    --leaderboard-highscore-color: #FFFFFF;
-    
-    --slider-color: #bebebe;
-    --switch-color: #514BE9;
-    --toggled-color: #ececec;
-
-    --game-border:  2px solid #bebebe;
-    --default-border: 2px solid #424242;
-    --accent-border: 2px solid #514BE9;
-
+    --accent-color-hover: #736EFF;
+    --accent-foreground-color: #FFFFFF;
+    --primary-background-color: #ECECEC;
+    --secondary-background-color: #FFFFFF;
+    --primary-foreground-color: #202020;
+    --first-position-color: #ffc744;
+    --second-position-color: #cacaf0;
+    --third-position-color: #e7994f;
     --disabled: #bebebe;
-    --disabled-text: #424242;
-
-    --results-content-text: #FFFFFF;
-
-    --nav-shadow: 0 4px 4px -2px rgba(0,0,0,0.23);
-    --card-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.24);
-    color: var(--text-color);
-	background-color: var(--bg-color);
+    --disabled-foreground: #424242;
+    --border-color: #929292;
+    --border: 2px solid var(--border-color);
+    
+    color: var(--primary-foreground-color);
+	background-color: var(--primary-background-color);
 }
 
 :root {
@@ -81,6 +44,9 @@
     --github-color: #444444;
     --twitter-color: #50ABF1;
     --facebook-color: #39579A;
+
+    --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.24);
+    --bottom-shadow: 0 4px 4px -2px rgba(0,0,0,0.23);
 
     --border-radius: 3px;
     --border-radius-left: 3px 0 0 3px;
