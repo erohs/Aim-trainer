@@ -22,7 +22,7 @@ class Leaderboard extends React.Component<ILeaderboardProps> {
 
     getLeaderBoard = async () => {
         const collection = `${this.props.leaderboard}Highscores`;
-        const events = await firebase.firestore().collection(collection).orderBy("results.score", "desc");
+        const events = await firebase.firestore().collection(collection).orderBy("results.score", "desc").limit(50);
         events.get().then((querySnapshot) => {
             const tempDoc = querySnapshot.docs.map((doc) => {
                 return { id: doc.id, ...doc.data() }
