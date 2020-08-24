@@ -15,7 +15,7 @@ class GameStart extends React.Component<IGameStartProps> {
         return (
             <div className="game-start--container">
                 {/* {logout} */}
-                <Link to="/play">
+                <Link tabIndex={-1} to="/play">
                     <button className="game-start--button">Start</button>
                 </Link>
             </div>

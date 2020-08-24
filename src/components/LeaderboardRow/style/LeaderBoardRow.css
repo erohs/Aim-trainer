@@ -1,32 +1,33 @@
 .leader-board-row {
-    min-height: 60px;
+    height: 60px;
     display: flex;
     width: 100%;
-    background-color: var(--secondary-bg-color);
-    font-weight: bold;
+    background-color: var(--secondary-background-color);
     line-height: 60px;
     margin: var(--s-padding-v);
     overflow: hidden;
     border-radius: var(--border-radius);
+    box-sizing: border-box;
+    box-shadow: var(--shadow);
+    color: var(--primary-foreground-color);
 }
 
 .leader-board-row:nth-of-type(1) div:nth-of-type(3) {
-    background-color: #CC9000;
+    background-color: var(--first-position-color);
 }
 
 .leader-board-row:nth-of-type(2) div:nth-of-type(3) {
-    background-color: #7A7A7F;
+    background-color: var(--second-position-color);;
 }
 
 .leader-board-row:nth-of-type(3) div:nth-of-type(3) {
-    background-color: #A66426;
+    background-color: var(--third-position-color);
 }
 
 .leader-board-row--position {
     font-weight: bold;
     text-align: center;
-    width: 60px;
-    background-color: var(--border-color);
+    min-width: 60px;
 }
 
 .leader-board-row--name {
@@ -38,7 +39,7 @@
     font-size: 1.4em;
     text-align: center;
     padding-left: 12px;
-    width: 120px;
+    min-width: 120px;
     background-color: var(--accent-color);
 
     clip-path: 

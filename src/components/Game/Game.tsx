@@ -2,57 +2,55 @@ import React from 'react';
 import './style/Game.css';
 import Target from '../Target/Target';
 import Countdown from '../Countdown/Countdown';
-import GameOver from '../GameOver/GameOver';
 import { IGameState } from './interfaces/IGameState';
 import { setDefaultSettings } from '../../helpers/SettingsHelper';
+import * as ResultsHelper from '../../helpers/ResultsHelper';
+import { Redirect } from 'react-router-dom';
 
 class Game extends React.Component {
-
     state: IGameState = {
         targets: {},
         settings: {},
-        gameover: false,
-        targetCount: {
-            total: 0,
-            misses: 0,
-            hits: 0
+        results: {
+            score: 0,
+            combo: 1,
+            targets: {
+                total: 0,
+                hits: 0,
+                missed: 0,
+                perSecond: 0,
+                efficiency: 0
+            },
+            clicks: {
+                total: 0,
+                hits: 0,
+                missed: 0,
+                perSecond: 0,
+                accuracy: 0
+            },
+            settings: {}
         },
-        clickCount: {
-            total: 0,
-            misses: 0,
-            hits: 0
-        },
-        score: 0
+        redirect: false,
+        timer: 0
     }
 
     speed: any;
 
     tick() {
-        if (this.state.settings.duration <= 0) {
+        if (this.state.timer <= 0) {
             this.transition();
             return;
         }
-        this.addTarget();
-        const settings = { ...this.state.settings };
-        settings.duration = this.state.settings.duration - (0.001 * this.state.settings.difficulty);
-        this.setState({ settings });
 
+        this.addTarget();
+        this.setState({ timer: this.state.timer - (0.001 * this.state.settings.difficulty) });
     }
 
     transition() {
-        this.setGameState("gameover", true)
-        this.setTargetCount("misses");
-        this.setClickCount("total")
         clearInterval(this.speed);
-        this.calculateScore()
-    }
-
-    calculateScore = () => {
-        let calculatedScore = this.state.targetCount.hits - this.state.clickCount.misses;
-        calculatedScore = (calculatedScore * 1000) / this.state.settings.difficulty;
-        calculatedScore = calculatedScore * + this.state.settings.duration;
-        calculatedScore = calculatedScore * this.state.settings.sizes;
-        this.setState({ score: calculatedScore });
+        this.setState({ results: ResultsHelper.sanitizeResults(this.state.results) });
+        localStorage.setItem("results", JSON.stringify(this.state.results));
+        this.setState({ redirect: true })
     }
 
     componentDidMount() {
@@ -61,6 +59,8 @@ class Game extends React.Component {
         }
         const settings = JSON.parse(localStorage.getItem("settings") || '{}');
         this.setState({ settings: settings });
+        this.setState({ results: ResultsHelper.setDefaultResults(this.state.results, settings) })
+        this.setState({ timer: settings.duration })
     }
 
     componentWillUnmount() {
@@ -71,27 +71,13 @@ class Game extends React.Component {
         this.speed = setInterval(() => this.tick(), this.state.settings.difficulty);
     }
 
-    setTargetCount = (name: string) => {
-        const targetCount = { ...this.state.targetCount }
-        targetCount[name] = targetCount[name] + 1;
-        if (name === "misses") targetCount[name] = targetCount["total"] - targetCount["hits"];
-        this.setState({ targetCount });
-    }
-
-    setClickCount = (name: string) => {
-        const clickCount = { ...this.state.clickCount }
-        if (this.state.targetCount.total > 0) clickCount[name] = clickCount[name] + 1;
-        if (name === "total") clickCount[name] = clickCount["misses"] + clickCount["hits"]
-        this.setState({ clickCount });
-    }
-
     addTarget = () => {
         var key = Date.now();
         var targets = { ...this.state.targets };
         const area = document.getElementsByClassName('game-area')[0] as HTMLDivElement;
         var position = this.randomPosition(area);
         targets[key] = <Target key={key} index={key} targets={this.state.targets} removeOnClick={this.removeOnClick} position={position} settings={this.state.settings} />;
-        this.setTargetCount("total")
+        this.setState({ results: ResultsHelper.updateTargetsTotal(this.state.results) });
         this.setState({ targets }, () => {
             if (Object.keys(this.state.targets).length > 6) {
                 this.removeTarget()
@@ -104,14 +90,14 @@ class Game extends React.Component {
         var firstKey = Object.keys(targets)[0]
         delete targets[firstKey];
         this.setState({ targets });
+        this.setState({ results: ResultsHelper.updateTargetsMissed(this.state.results) });
     }
 
     removeOnClick = (id: number) => {
         const targets = { ...this.state.targets };
         delete targets[id];
         this.setState({ targets });
-        this.setTargetCount("hits");
-        this.setClickCount("hits");
+        this.setState({ results: ResultsHelper.updateHits(this.state.timer, this.state.results) });
     }
 
     randomPosition = (area: HTMLDivElement) => {
@@ -139,24 +125,15 @@ class Game extends React.Component {
             cursor: this.state.settings.cursor
         }
 
-        if (this.state.gameover === false) {
-            return (
-                <div style={gameAreaStyle} onClick={() => this.setClickCount("misses")} className="game-area">
-                    <Countdown startGame={this.startGame} />
-                    {Object.keys(this.state.targets).map(key => (this.state.targets[key]))}
-                </div>
-            )
-        } else {
-            return (
-                <div className="game-area">
-                    <GameOver
-                        clickCount={this.state.clickCount}
-                        targetCount={this.state.targetCount}
-                        score={this.state.score}
-                    />
-                </div>
-            )
-        }
+        if (this.state.redirect) return <Redirect to="/results" />
+
+        return (
+            <div style={gameAreaStyle} onClick={() => this.setState({ results: ResultsHelper.updateClicksMissed(this.state.timer, this.state.results) })} className="game-area">
+                <Countdown startGame={this.startGame} />
+                {Object.keys(this.state.targets).map(key => (this.state.targets[key]))}
+            </div>
+        )
+
     }
 }
 
