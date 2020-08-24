@@ -1,4 +1,4 @@
 .game-container {
-    border: var(--game-border);
+    border: var(--border);
     height: calc(100vh - 86px);
 }

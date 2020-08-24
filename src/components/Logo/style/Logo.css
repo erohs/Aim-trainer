@@ -1,3 +1,21 @@
-.accent-colour {
-    color: var(--accent-color);
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo--icon {
+    padding-right: var(--s-padding);
+    fill: var(--accent-color);
+    width: 48px;
+    height: 48px;
+}
+
+@media screen and (max-width: 540px) {
+    .logo--text {
+        display: none;
+    }
+
+    .logo--icon {
+        padding-right: 0;
+    }
 }

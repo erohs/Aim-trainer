@@ -2,8 +2,10 @@ import React from 'react';
 import './style/LeaderBoardPage.css';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
 import LeaderBoard from '../../components/Leaderboard/Leaderboard';
+import DynamicDropdown from '../../components/DynamicDropdown/DynamicDropdown';
 import { Settings } from '../../components/GameSettings/Settings';
 import { ILeaderboardPageState } from './interfaces/ILeaderboardPageState';
+
 
 class LeaderboardPage extends React.Component {
     state: ILeaderboardPageState = {
@@ -15,8 +17,10 @@ class LeaderboardPage extends React.Component {
     }
 
     onDropdownSelected = (event: React.FormEvent<HTMLSelectElement>) => {
-        this.setState({ leaderboard: event.currentTarget.value })
-        localStorage.setItem("leaderboard", event.currentTarget.value);
+        if (this.state.leaderboard !== event.currentTarget.value) {
+            this.setState({ leaderboard: event.currentTarget.value })
+            localStorage.setItem("leaderboard", event.currentTarget.value);
+        }
     }
 
     render() {
@@ -24,13 +28,14 @@ class LeaderboardPage extends React.Component {
             <>
                 <NavigationBar />
                 <h2 className="leaderboard-page--title">LEADERBOARD</h2>
-
                 <div className="leaderboard-page--container" >
-                    <select onChange={this.onDropdownSelected} defaultValue={this.state.leaderboard}>
-                        {Settings.gamemode.values.map(item => (
-                            <option key={item as string} value={item as string}>{item}</option>
-                        ))}
-                    </select>
+                    <div className="leaderboard-page--options">
+                        <div className="leaderboard-page--options-text">
+                            <h3>Selected gamemode: </h3>
+                        </div>
+                        <DynamicDropdown onSelect={this.onDropdownSelected} default={this.state.leaderboard} values={Settings.gamemode.values} />
+                    </div>
+
                     <LeaderBoard leaderboard={this.state.leaderboard} />
                 </div>
             </>

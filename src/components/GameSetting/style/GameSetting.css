@@ -1,26 +1,23 @@
 .game-settings {
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    
 }
 
 .game-setting--container {
     min-height: 60px;
     display: flex;
+    justify-content: space-between;
     min-width: 500px;
     margin: var(--xs-padding) 0;
-    box-shadow: var(--card-shadow);
+    background-color: var(--secondary-background-color);
+    color: var(--primary-foreground-color);
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
 }
 
 .game-setting--container:nth-last-child(1):nth-child(odd) {
     margin: 0 auto;
-}
-
-@media screen and (max-width: 1700px) {
-    .game-settings {
-        display: flex;
-        justify-content: space-around;
-    }
 }
 
 .game-setting--name {
@@ -28,39 +25,29 @@
     font-weight: bold;
     display: flex;
     align-items: center;
-    border-radius: var(--border-radius-left);
     padding: var(--m-padding-h);
-    background-color: var(--secondary-cards-color);
-    color: var(--cards-text-color);
-    width: 120px;
+    min-width: 90px;
 }
 
 .game-setting--selector {
     display: flex;
+    text-align: center;
     justify-content: space-between;
     align-items: center;
     padding: var(--m-padding-h);
-    background-color: var(--cards-color);
-    border-radius: var(--border-radius-right);
-    color: var(--cards-text-color);
+    max-width: 300px;
     flex-grow: 1;
-}
-
-.game-setting--arrows {
-    display: flex;
 }
 
 .game-setting--arrow {
     font-size: 18px;
     margin: 2px 0;
-    background-color: var(--bg-color);
+    background-color: var(--accent-color);
     border: none;
     border-radius: 3px;
     cursor: pointer;
     text-decoration: none;
-    
-    margin:  0 0 0 6px;
-    color: var(--accent-color);
+    color: var(--accent-foreground-color);
 }
 
 .game-setting--arrow.left{ 
@@ -72,24 +59,29 @@
 }
 
 .game-setting--arrow:hover {
-    background-color: var(--border-color);
+    background-color: var(--accent-color-hover);
 }
 
 .game-setting--input {
     text-transform: uppercase;
-    background-color: var(--bg-color);
-    border: none;
+    background-color: var(--primary-background-color);
+    border-bottom: 3px solid var(--primary-background-color);
     border-radius: var(--border-radius);
     padding: var(--xs-padding);
-    color: var(--text-color);
-    flex-grow: 1;
+    color: var(--primary-foreground-color);
+    width: 100%;
 }
 
-.game-setting--colour {
-    background-color: var(--border-color);
-    border: 5px solid var(--bg-color);
-    border-radius: 100px;
-    width: 25px;
-    height: 25px;
-    margin: 0 9px 0 29px;
+@media screen and (max-width: 1040px) {
+    .game-settings {
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .game-setting--container {
+        min-width: 100%;
+        margin: var(--xs-padding) var(--s-padding);
+    }
 }

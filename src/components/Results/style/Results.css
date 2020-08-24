@@ -14,10 +14,10 @@
     border-radius: var(--border-radius);
     display: flex;
     flex-direction: column;
-    min-width: 300px;
-    box-shadow: var(--card-shadow);
-    background-color: var(--secondary-cards-color);
-    color: var(--cards-text-color);
+    width: 300px;
+    box-shadow: var(--shadow);
+    background-color: var(--secondary-background-color);
+    color: var(--primary-foreground-color);
     padding: var(--m-padding);
     margin: var(--s-padding);
 }
@@ -30,7 +30,7 @@
     font-weight: bold;
     width: 100px;
     padding-right: var(--s-padding);
-    color: var(--results-content-text);
+    color: var(--accent-color);
 }
 
 .results--card-contents {
@@ -40,7 +40,7 @@
 }
 
 .results--card-content {
-    color: var(--results-content-text);
+    color: var(--accent-color);
     padding-right: var(--m-padding);
     font-size: 3em;
     font-weight: bold;

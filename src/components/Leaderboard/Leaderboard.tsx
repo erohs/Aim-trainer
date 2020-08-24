@@ -15,14 +15,14 @@ class Leaderboard extends React.Component<ILeaderboardProps> {
         this.getLeaderBoard();
     }
 
-    componentDidUpdate() {
-        this.getLeaderBoard();
-    }
+    // infinite loop no no data leak
+    // componentDidUpdate() {
+    //     this.getLeaderBoard();
+    // }
 
     getLeaderBoard = async () => {
         const collection = `${this.props.leaderboard}Highscores`;
-        const events = await firebase.firestore().collection(collection).orderBy("results.score", "desc")
-        // .limit(10); an add to limit it
+        const events = await firebase.firestore().collection(collection).orderBy("results.score", "desc");
         events.get().then((querySnapshot) => {
             const tempDoc = querySnapshot.docs.map((doc) => {
                 return { id: doc.id, ...doc.data() }

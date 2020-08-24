@@ -5,9 +5,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--nav-color);
-    box-shadow: var(--nav-shadow);
-    color: var(--nav-text-color);
+    background-color: var(--secondary-background-color);
+    box-shadow: var(--bottom-shadow);
+    color: var(--primary-foreground-color);
 }
 
 .navigation-bar--theme-switch {
@@ -28,10 +28,14 @@
     padding-left: var(--m-padding);
 }
 
+.navigation-bar ul li:first-child {
+    padding-left: 0;
+}
+
 .navigation-bar--link {
     text-decoration: none;
     background: none;
-    color: var(--nav-text-color);
+    color: var(--primary-foreground-color);
 }
 
 .navigation-bar--link:hover {
@@ -43,11 +47,11 @@
     cursor: pointer;
     border-radius: var(--border-radius);
     background-color: var(--accent-color);
-    color: var(--cards-text-color);
+    color: var(--accent-foreground-color);
     padding: var(--s-padding-v);
     width: 150px;
     margin: var(--s-padding-h);
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--shadow);
 }
 
 .navigation-bar--end-game:hover {

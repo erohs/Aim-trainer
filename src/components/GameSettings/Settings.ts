@@ -3,8 +3,8 @@ import { SettingTypes } from '../../enums';
 
 export let Settings: ISettings = {
     gamemode: {
-        types: ["Standard", "Flick"],
-        values: ["standard", "flick"],
+        types: ["Standard"],
+        values: ["standard"],
         type: SettingTypes.select,
         default: "standard"
     },

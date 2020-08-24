@@ -39,11 +39,9 @@ class GameSetting extends React.Component<IGameSettingProps> {
                     <div className="game-setting--container">
                         <p className="game-setting--name">{this.props.name}</p>
                         <div className="game-setting--selector">
+                            <button onClick={this.prevValue} className="game-setting--arrow left">&#x25C0;</button>
                             <p>{this.props.types[this.props.values.indexOf(this.props.currentValue)]}</p>
-                            <div className="game-setting--arrows">
-                                <button onClick={this.prevValue} className="game-setting--arrow left">&#x25C0;</button>
-                                <button onClick={this.nextValue} className="game-setting--arrow right">&#x25B6;</button>
-                            </div>
+                            <button onClick={this.nextValue} className="game-setting--arrow right">&#x25B6;</button>
                         </div>
                     </div>
                 )
@@ -53,12 +51,12 @@ class GameSetting extends React.Component<IGameSettingProps> {
                         <p className="game-setting--name">{this.props.name}</p>
                         <div className="game-setting--selector">
                             <input
+                                style={{ borderColor: this.props.currentValue as string }}
                                 className="game-setting--input"
                                 type="text"
                                 value={this.props.currentValue as string}
                                 onChange={this.handleChange}
                             />
-                            <div style={{ background: this.props.currentValue as string }} className="game-setting--colour"></div>
                         </div>
                     </div>
                 )

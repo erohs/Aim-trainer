@@ -22,10 +22,10 @@
     cursor: pointer;
     border-radius: var(--border-radius);
     background-color: var(--accent-color);
-    color: var(--cards-text-color);
+    color: var(--accent-foreground-color);
     padding: var(--s-padding-v);
     width: 160px;
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--shadow);
 }
 
 .results-page--play-again:hover {
@@ -37,10 +37,10 @@
     cursor: pointer;
     border-radius: var(--border-radius);
     background-color: var(--accent-color);
-    color: var(--cards-text-color);
+    color: var(--accent-foreground-color);
     padding: var(--s-padding-v);
     width: 160px;
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--shadow);
 }
 
 .results-page--setup:hover {
@@ -51,13 +51,13 @@
     margin: var(--s-padding);
     display: flex;
     flex-grow: 1;
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--shadow);
 }
 
 .results-page--save-input {
     border-radius: var(--border-radius-left);
-    background-color: var(--nav-color);
-    color: var(--text-color);
+    background-color: var(--secondary-background-color);
+    color: var(--primary-foreground-color);
     padding: var(--s-padding);
     flex-grow: 1;
 }
@@ -66,14 +66,14 @@
     cursor: pointer;
     border-radius: var(--border-radius-right);
     background-color: var(--accent-color);
-    color: var(--cards-text-color);
+    color: var(--accent-foreground-color);
     padding: var(--s-padding-v);
     width: 100px;
 }
 
 .results-page--save-submit:disabled {
     background-color: var(--disabled);
-    color: var(--disabled-text)
+    color: var(--disabled-foreground)
 }
 
 .results-page--save-submit:disabled:hover {
