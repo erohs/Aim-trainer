@@ -16,7 +16,6 @@
 
     color: var(--primary-foreground-color);
 	background-color: var(--primary-background-color);
-    
 }
 
 .light-theme {
@@ -39,7 +38,6 @@
 }
 
 :root {
-    
     --google-color: #DF4A32;
     --github-color: #444444;
     --twitter-color: #50ABF1;
