@@ -1,16 +1,29 @@
 import React from 'react';
 import './style/GamePage.css';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
-import Game from '../../components/Game/Game';
+import Gamemode from '../../components/Gamemode/Gamemode';
 import { IGameProps } from './interfaces/IGamePageProps';
+import { setDefaultSettings } from '../../helpers/SettingsHelper';
 
 class GamePage extends React.Component<IGameProps> {
+    state = {
+        gamemode: ""
+    }
+
+    componentDidMount() {
+        if (localStorage.getItem("settings") === null) {
+            setDefaultSettings();
+        }
+        const settings = JSON.parse(localStorage.getItem("settings") || '{}');
+        this.setState({ gamemode: settings.gamemode });
+    }
+
     render() {
         return (
             <>
                 <NavigationBar />
                 <div className="game-container">
-                    <Game />
+                    <Gamemode gamemode={this.state.gamemode} />
                 </div>
             </>
         )
