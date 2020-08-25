@@ -3,9 +3,11 @@ import './style/Game.css';
 import Target from '../Target/Target';
 import Countdown from '../Countdown/Countdown';
 import { IGameState } from './interfaces/IGameState';
-import { setDefaultSettings } from '../../helpers/SettingsHelper';
 import * as ResultsHelper from '../../helpers/ResultsHelper';
 import { Redirect } from 'react-router-dom';
+import { randomPosition } from '../../helpers/GameHelper';
+
+const values = [1000, 800, 600, 400]
 
 class Game extends React.Component {
     state: IGameState = {
@@ -43,7 +45,7 @@ class Game extends React.Component {
         }
 
         this.addTarget();
-        this.setState({ timer: this.state.timer - (0.001 * this.state.settings.difficulty) });
+        this.setState({ timer: this.state.timer - (0.001 * values[this.state.settings.difficulty]) });
     }
 
     transition() {
@@ -54,9 +56,6 @@ class Game extends React.Component {
     }
 
     componentDidMount() {
-        if (localStorage.getItem("settings") === null) {
-            setDefaultSettings();
-        }
         const settings = JSON.parse(localStorage.getItem("settings") || '{}');
         this.setState({ settings: settings });
         this.setState({ results: ResultsHelper.setDefaultResults(this.state.results, settings) })
@@ -68,14 +67,14 @@ class Game extends React.Component {
     }
 
     startGame = () => {
-        this.speed = setInterval(() => this.tick(), this.state.settings.difficulty);
+        this.speed = setInterval(() => this.tick(), values[this.state.settings.difficulty]);
     }
 
     addTarget = () => {
         var key = Date.now();
         var targets = { ...this.state.targets };
         const area = document.getElementsByClassName('game-area')[0] as HTMLDivElement;
-        var position = this.randomPosition(area);
+        var position = randomPosition(area, this.state.settings.sizes);
         targets[key] = <Target key={key} index={key} targets={this.state.targets} removeOnClick={this.removeOnClick} position={position} settings={this.state.settings} />;
         this.setState({ results: ResultsHelper.updateTargetsTotal(this.state.results) });
         this.setState({ targets }, () => {
@@ -100,17 +99,7 @@ class Game extends React.Component {
         this.setState({ results: ResultsHelper.updateHits(this.state.timer, this.state.results) });
     }
 
-    randomPosition = (area: HTMLDivElement) => {
-        const offset = this.state.settings.sizes;
-        const rect = area.getBoundingClientRect();
-        const minx = rect.left + offset;
-        const maxx = rect.right - offset;
-        const miny = rect.top;
-        const maxy = rect.bottom - offset
-        const x = Math.floor(Math.random() * (maxx - minx)) + minx;
-        const y = Math.floor(Math.random() * (maxy - miny)) + miny;
-        return [x, y]
-    }
+
 
     setGameState = (name: string, state: boolean) => {
         if (name === "playing") {
