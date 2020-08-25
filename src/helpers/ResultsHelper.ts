@@ -1,4 +1,5 @@
 import { IStateTypes } from '../App';
+import { Settings } from '../components/GameSettings/Settings';
 
 export interface IResults {
     score: number,
@@ -80,11 +81,15 @@ const updateClickAccuracy = (results: IResults) => {
 
 const calculateScore = (results: IResults) => {
     let newResults = { ...results };
-    const difficultyMultiplyer = 1 / (newResults.settings.difficulty as number / 1000); // 1 1.25, 1.66, 2.5
-    const durationMultiplyer = 1 + (0.1 * (newResults.settings.duration as number / 10)); //1.5, 3, 6, 9, 12
-    const sizeMultiplyer = 1 + (1 / (1 + (0.1 * (newResults.settings.sizes as number / 10))));
-    const score = 1 * difficultyMultiplyer * durationMultiplyer * sizeMultiplyer * newResults.combo;
-    newResults.score += score;
+    let values = [1, newResults.combo]
+
+    for (const setting in newResults.settings) {
+        const index = Settings[setting].values.indexOf(newResults.settings[setting]);
+        values.push(Settings[setting].weight[index]);
+    }
+
+    newResults.score += values.reduce((a, b) => a * b, 1);
+
     return newResults;
 }
 

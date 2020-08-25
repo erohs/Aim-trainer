@@ -8,7 +8,7 @@ class DynamicDropdown extends React.Component<IDynamicDropdownProps> {
             <div className="dynamic-dropdown">
                 <select onClick={(event: React.FormEvent<HTMLSelectElement>) => this.props.onSelect(event)} defaultValue={this.props.default}>
                     {this.props.values.map(item => (
-                        <option className="dynamic-dropdown--object" key={item as string} value={item as string}>{item}</option>
+                        <option key={item as string} value={item as string}>{item}</option>
                     ))}
                 </select>
             </div>

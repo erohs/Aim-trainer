@@ -8,6 +8,7 @@ export interface IGameSettingsValues {
 interface ISetting {
     types: Array<string>
     values: Array<string | boolean | number>
+    weight: Array<number>
     type: SettingTypes
     default: string | boolean | number
 }
