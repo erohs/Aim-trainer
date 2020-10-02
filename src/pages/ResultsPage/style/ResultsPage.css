@@ -104,3 +104,23 @@
         width: var(--results-1-card);
     }
 }
+
+.loading-enter {
+    transform: translateX(+120%);
+    transition: 500ms;
+}
+
+.loading-enter-active {
+    transform: translateX(0);
+}
+
+.loading-exit {
+    transform: translateX(0);
+    transition: 500ms;
+}
+
+.loading-exit-active {
+    transform: translateX(-120%);
+}
+
+

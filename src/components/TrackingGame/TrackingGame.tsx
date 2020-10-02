@@ -1,16 +1,14 @@
 import React from 'react';
-import './style/Game.css';
-import Target from '../Target/Target';
+import './style/TrackingGame.css';
+import TrackingTarget from '../TrackingTarget/TrackingTarget';
 import Countdown from '../Countdown/Countdown';
-import { IGameState } from './interfaces/IGameState';
+import { ITrackingGameState } from './interfaces/ITrackingGameState';
 import * as ResultsHelper from '../../helpers/ResultsHelper';
 import { Redirect } from 'react-router-dom';
 import { randomPosition } from '../../helpers/GameHelper';
 
-const values = [1000, 800, 600, 400]
-
-class Game extends React.Component {
-    state: IGameState = {
+class TrackingGame extends React.Component {
+    state: ITrackingGameState = {
         targets: {},
         settings: {},
         results: {
@@ -37,23 +35,25 @@ class Game extends React.Component {
     }
 
     speed: any;
+    timer: any;
 
-    tick() {
-        if (this.state.timer <= 0) {
-            this.transition();
-            return;
+    timeLeft = () => {
+        let timer = this.state.timer;
+        --timer
+        this.setState({ timer })
+        if (this.state.timer === 0) {
+            this.endGame();
         }
-
-        this.addTarget();
-        this.setState({ timer: this.state.timer - (0.001 * values[this.state.settings.difficulty]) });
     }
 
-    transition() {
+    endGame() {
+        clearInterval(this.timer);
         clearInterval(this.speed);
         this.setState({ results: ResultsHelper.sanitizeResults(this.state.results) });
         localStorage.setItem("results", JSON.stringify(this.state.results));
         this.setState({ redirect: true })
     }
+
 
     componentDidMount() {
         const settings = JSON.parse(localStorage.getItem("settings") || '{}');
@@ -67,21 +67,29 @@ class Game extends React.Component {
     }
 
     startGame = () => {
-        this.speed = setInterval(() => this.tick(), values[this.state.settings.difficulty]);
+        this.timer = setInterval(() => this.timeLeft(), 1000);
+        this.addTarget()
+        this.speed = setInterval(() => this.addTarget(), 5000);
     }
 
     addTarget = () => {
-        var key = Date.now();
-        var targets = { ...this.state.targets };
+        const key = Date.now();
         const area = document.getElementsByClassName('game-area')[0] as HTMLDivElement;
-        var position = randomPosition(area, this.state.settings.sizes);
-        targets[key] = <Target key={key} index={key} targets={this.state.targets} removeOnClick={this.removeOnClick} position={position} settings={this.state.settings} />;
-        this.setState({ results: ResultsHelper.updateTargetsTotal(this.state.results) });
-        this.setState({ targets }, () => {
+        const position = randomPosition(area, this.state.settings.sizes);
+        const targets = { ...this.state.targets };
+
+        targets[key] = <TrackingTarget key={key}
+            index={key}
+            targets={this.state.targets}
+            removeOnClick={this.removeOnClick}
+            position={position}
+            settings={this.state.settings} />;
+
+        this.setState({ results: ResultsHelper.updateTargetsTotal(this.state.results), targets }, () => {
             if (Object.keys(this.state.targets).length > 6) {
                 this.removeTarget()
             }
-        })
+        });
     }
 
     removeTarget = () => {
@@ -122,8 +130,7 @@ class Game extends React.Component {
                 {Object.keys(this.state.targets).map(key => (this.state.targets[key]))}
             </div>
         )
-
     }
 }
 
-export default Game;
+export default TrackingGame;

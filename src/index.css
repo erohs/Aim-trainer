@@ -28,9 +28,10 @@ body, input, select {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-html, body, #app {
+.page {
+	overflow-x: hidden;
 	min-height: 100vh;
-	overflow: auto;
+	overflow-y: auto;
 }
 
 code {

@@ -1,10 +1,14 @@
 import React from 'react';
-import Game from '../Game/Game';
+import ClickingGame from '../ClickingGame/ClickingGame';
+import TrackingGame from '../TrackingGame/TrackingGame';
+import MovingGame from '../MovingGame/MovingGame';
 import { IGamemodeProps } from './interfaces/IGamemodeProps';
 import { IGamemodes } from './interfaces/IGamemodes';
 
 const gamemodes: IGamemodes = {
-    clicking: Game
+    clicking: ClickingGame,
+    moving: MovingGame,
+    tracking: TrackingGame
 }
 
 class Gamemode extends React.Component<IGamemodeProps> {

@@ -1,0 +1,11 @@
+.game-over {
+    position: absolute;
+    top: 35vh;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 10vw;
+    color: var(--accent-color);
+}

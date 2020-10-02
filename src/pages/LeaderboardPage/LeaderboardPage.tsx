@@ -25,7 +25,7 @@ class LeaderboardPage extends React.Component {
 
     render() {
         return (
-            <>
+            <div className="page">
                 <NavigationBar />
                 <h2 className="leaderboard-page--title">LEADERBOARD</h2>
                 <div className="leaderboard-page--container" >
@@ -38,7 +38,7 @@ class LeaderboardPage extends React.Component {
 
                     <LeaderBoard leaderboard={this.state.leaderboard} />
                 </div>
-            </>
+            </div>
         )
     }
 }

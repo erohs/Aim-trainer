@@ -2,10 +2,12 @@ import React from 'react';
 import './style/ResultsPage.css';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
 import Results from '../../components/Results/Results';
+import GameOver from '../../components/GameOver/GameOver';
 import { setDefaultSettings } from '../../helpers/SettingsHelper';
 import { storeDefaultResults, IResults } from '../../helpers/ResultsHelper';
 import { IResultsPageState } from './interfaces/IResultsPageState';
 import { Link } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import firebase from 'firebase';
 
 
@@ -30,7 +32,8 @@ class ResultsPage extends React.Component {
             },
             settings: {}
         },
-        name: ""
+        name: "",
+        loaded: false
     }
 
     componentDidMount() {
@@ -64,29 +67,54 @@ class ResultsPage extends React.Component {
         this.setState({ name: event.currentTarget.value });
     }
 
+    onLoad = () => {
+        this.setState({ loaded: true })
+    }
+
     render() {
-        return (
-            <>
-                <NavigationBar />
-                <div className="results-page">
-                    <h2 className="results-page--title">RESULTS</h2>
-                    <Results results={this.state.results} />
-                </div>
-                <div className="results-page--options">
-                    <Link tabIndex={-1} to="/play" >
-                        <button className="results-page--play-again" >Play Again</button>
-                    </Link>
-                    <Link tabIndex={-1} to="/" >
-                        <button className="results-page--setup" >Setup</button>
-                    </Link>
-                    <div className="results-page--save">
-                        <input onChange={this.handleChange} value={this.state.name} placeholder="Enter name..." type="text" className="results-page--save-input" />
-                        <Link tabIndex={-1} to="/leaderboard" >
-                            <button className="results-page--save-submit" onClick={this.continue} disabled={!this.state.name || this.state.results.targets.total === 0}>Save</button>
-                        </Link>
+
+        let content = undefined;
+
+        if (!this.state.loaded) {
+            content = (
+                <CSSTransition classNames="loading" key="gameover" timeout={500} >
+                    <GameOver onLoad={this.onLoad} />
+                </CSSTransition>
+            )
+        } else {
+            content = (
+                <CSSTransition classNames="loading" key="results" timeout={500} >
+                    <div>
+                        <div className="results-page">
+                            <h2 className="results-page--title">RESULTS</h2>
+                            <Results results={this.state.results} />
+                        </div>
+                        <div className="results-page--options">
+                            <Link tabIndex={-1} to="/play" >
+                                <button className="results-page--play-again" >Play Again</button>
+                            </Link>
+                            <Link tabIndex={-1} to="/" >
+                                <button className="results-page--setup" >Setup</button>
+                            </Link>
+                            <div className="results-page--save">
+                                <input onChange={this.handleChange} value={this.state.name} placeholder="Enter name..." type="text" className="results-page--save-input" />
+                                <Link tabIndex={-1} to="/leaderboard" >
+                                    <button className="results-page--save-submit" onClick={this.continue} disabled={!this.state.name || this.state.results.targets.total === 0}>Save</button>
+                                </Link>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </>
+                </CSSTransition>
+            )
+        }
+
+        return (
+            <div className="page">
+                <NavigationBar />
+                <TransitionGroup component="div" className="loading">
+                    {content}
+                </TransitionGroup>
+            </div>
         )
     }
 }

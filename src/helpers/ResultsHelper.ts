@@ -93,8 +93,8 @@ const calculateScore = (results: IResults) => {
     return newResults;
 }
 
-const roundNumber = (number: number) => {
-    return Math.round((number + Number.EPSILON) * 100) / 100;
+export const roundNumber = (number: number) => {
+    return Math.round((number + 0.00001) * 100) / 100;
 }
 
 export const sanitizeResults = (results: IResults) => {
