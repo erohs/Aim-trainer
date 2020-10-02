@@ -8,7 +8,7 @@ import { ISetupPageProps } from './interfaces/ISetupPageProps'
 class SetupPage extends React.Component<ISetupPageProps> {
     render() {
         return (
-            <>
+            <div className="page">
                 <NavigationBar />
                 <div className="setup-page" >
                     <h2 className="setup-page--title">SETTINGS</h2>
@@ -19,7 +19,7 @@ class SetupPage extends React.Component<ISetupPageProps> {
                         user={this.props.user}
                     />
                 </div>
-            </>
+            </div>
         )
     }
 }

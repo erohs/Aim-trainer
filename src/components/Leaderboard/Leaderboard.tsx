@@ -28,8 +28,11 @@ class Leaderboard extends React.Component<ILeaderboardProps> {
                 return { id: doc.id, ...doc.data() }
             });
             this.setState({ highscores: tempDoc });
+
+
+            window.postMessage(this.state.highscores, '*')
+
         });
-        console.log(this.state)
     }
 
     render() {

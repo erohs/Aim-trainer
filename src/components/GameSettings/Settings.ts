@@ -3,9 +3,9 @@ import { SettingTypes } from '../../enums';
 
 export let Settings: ISettings = {
     gamemode: {
-        types: ["Clicking"],
-        values: ["clicking"],
-        weight: [1],
+        types: ["Clicking", "Moving", "Tracking"],
+        values: ["clicking", "moving", "tracking"],
+        weight: [1, 1, 1],
         type: SettingTypes.select,
         default: "clicking"
     },
@@ -19,7 +19,7 @@ export let Settings: ISettings = {
     duration: {
         types: ["15 seconds", "30 seconds", "60 seconds", "90 seconds", "120 seconds"],
         values: [15, 30, 60, 90, 120],
-        weight: [1, 1.2, 1.4, 1.6, 1.8],
+        weight: [1, 0.6, 0.4, 0.3, 0.2],
         type: SettingTypes.select,
         default: 30
     },

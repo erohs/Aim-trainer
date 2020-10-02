@@ -1,0 +1,16 @@
+.game-info {
+    position: relative;
+    float: right;
+    margin: var(--m-padding);
+    text-align: right;
+    color: var(--border-color);
+}
+
+.game-info--header {
+    font-size: 0.9em;
+}
+
+.game-info--value {
+    font-size: 2em;
+}
+
